@@ -36,12 +36,17 @@ private:
 		
 	cgvColor select;
 	float orbitA, orbitB;
-	float speed;
+
+	float orbital_speed;
+	float orbit_pos;
+
+	float rotation_speed;
+	float rotate_angle;
 
 
 
 public:
-	Planet(float _radius, char* image, float _orbitA, float _orbitB, float _speed, cgvColor _select);
+	Planet(float _radius, char* image, float _orbitA, float _orbitB, float _orbital_speed, float _rotational_speed, cgvColor _select);
 	void draw();
 	void orbith();
 	void move(bool direction);

@@ -2,13 +2,14 @@
 
 
 
-Planet::Planet(float _radius, char* image, float _orbitA, float _orbitB, float _speed, cgvColor _select)
+Planet::Planet(float _radius, char* image, float _orbitA, float _orbitB, float _speed, float _rotational_speed, cgvColor _select)
 {
 	//set parameters
 	this->radius = _radius;
 	this->orbitA = _orbitA;
 	this->orbitB = _orbitB;
-	this->speed = _speed;
+	this->orbital_speed = _speed;
+	this->rotation_speed = _rotational_speed;
 	this->select = _select;
 	this->image_path = image;
 	this->textureID = -1;
@@ -21,7 +22,7 @@ void Planet::draw()
 {
 	//draw it in the center of the wcs
 	glPushMatrix();
-
+	glRotatef(this->rotate_angle, 0, 1, 0);
 	
 	GLUquadric* sphere;
 
@@ -63,4 +64,8 @@ void Planet::orbith()
 void Planet::move(bool direction)
 {
 	//make it dance
+	//it moves in a period of time
+	this->rotate_angle++;
+	this->orbit_pos++;
+	
 }
