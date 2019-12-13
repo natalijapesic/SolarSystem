@@ -122,16 +122,38 @@ unsigned int cgvLight::is_On(void) {
 
 void cgvLight::apply(void) {
 
-// Section A
-// if the light is on
-//	enable the light
-//	set the position of the light
-//	set ambient, diffuse and specular colors
-//	set radial attenuation
-//	set the spotlight parameters: direction, cutoff, exponent. 
+	if (on)
+	{
+		//glEnable(GL_LIGHTING);//glEnable(GL_LIGHTING);
+		glEnable(idLight);//
 
-// If the light is off
-//	disable the light 
+		GLfloat pos[] = { position[0], position[1], position[2], 1 };
+		GLfloat amb[3] = { ambientColor[0], ambientColor[1], ambientColor[2] };
+		GLfloat diff[3] = { diffuseColor[0], diffuseColor[1], diffuseColor[2] };
+		GLfloat spec[3] = { specularColor[0], specularColor[1], specularColor[2] };
+
+		glLightfv(idLight, GL_POSITION, pos);
+
+		glLightfv(idLight, GL_AMBIENT, amb);
+		glLightfv(idLight, GL_DIFFUSE, diff);
+		glLightfv(idLight, GL_SPECULAR, spec);
+
+		glLightf(idLight, GL_CONSTANT_ATTENUATION, atten_a0);
+		glLightf(idLight, GL_LINEAR_ATTENUATION, atten_a1);
+		glLightf(idLight, GL_QUADRATIC_ATTENUATION, atten_a2);
+
+		GLfloat dir[3] = { spotlight_direction[0], spotlight_direction[1], spotlight_direction[2] };
+		glLightfv(idLight, GL_SPOT_DIRECTION, dir);
+		glLightf(idLight, GL_SPOT_CUTOFF, spotlight_angle);
+		glLightf(idLight, GL_SPOT_EXPONENT, spotlight_exponent);
+
+
+	}
+	// If the light is off
+	//	disable the light 
+	else {
+		glDisable(idLight);
+	}
 
 }
 

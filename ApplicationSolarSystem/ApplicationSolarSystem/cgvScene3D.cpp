@@ -75,47 +75,39 @@ void draw_quad() {
 
 void cgvScene3D::render(void) {
   
-	// create the model
-	glPushMatrix(); // store the model matrices
+	glPushMatrix(); 
 
-	  // draw the axes
 	  if (axes) draw_axes();
-		// the lights are placed before the transformations, this way they remain static during interaction
+	  char image[] = "D:/VII semestar Jaen/Computer Graphics and visualization/project/SolarSystem/textures/2k_earth_daymap.bmp";
+	  Planet Earth(2, image, 4, 5, 23, cgvColor(1, 0, 0));
+	  Earth.draw();
+	  //GLuint tex;
+	  //GLUquadric* sphere;
 
-	  // TODO: Section B: Define and apply the point light specified in the practice 
+	  //unsigned char* image;
+	  //unsigned int width, height;
 
-	  if (selectedScene == 1) { // blue quad
+	  //// load the BMP image in memory
+	  //image = loadBMPRaw("D:/VII semestar Jaen/Computer Graphics and visualization/project/SolarSystem/textures/2k_earth_daymap.bmp", width, height, true);
 
-		//  draw_quad();  
+	  //glGenTextures(1, &tex);
+	  //glBindTexture(GL_TEXTURE_2D, tex);
+	  ////glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_RGB, GL_UNSIGNED_BYTE, (const GLvoid*)data);
+	  //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	  //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	  //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	  //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	  }
-	  else if (selectedScene == 2) { // red quad
-		  /* TODO: Section D: define and apply the material properties as specified in the practice */
+	  //sphere = gluNewQuadric();
+	  //glEnable(GL_TEXTURE_2D);
 
-	  }
-	  else if (selectedScene == 3) { // mesh of quads
-	  /* TODO: Section E and F: */
+	  //glColor3f(0.0, 1.0, 0.0);
+	  //gluQuadricDrawStyle(sphere, GLU_FILL);
+	  //glBindTexture(GL_TEXTURE_2D, tex);
+	  //gluQuadricTexture(sphere, TRUE);
+	  //gluQuadricNormals(sphere, GLU_SMOOTH);
+	  //gluSphere(sphere, 1.0, 32, 16);
 
-	  }
-	  else if (selectedScene == 4) {// Spotlight
-		  // TODO: Section G: Define and apply a spotlight as specified in the practice instructions
-
-		  // TODO: Switch off the new spotlight
-	  }
-	  else if (selectedScene == 5) { // world map
-		  /* TODO: Section H: World map. Add the required code to cgvScene3D::render() to:
-				o	Create and bind a texture from the file map.BMP.
-				o	Render the triangle mesh of the scene. 
-			*/
-
-	  }
-
-
-	  // Assign the OpenGL default material. 
-	  cgvMaterial defaultMat(cgvColor(0.2, 0.2, 0.2, 1), cgvColor(0.8, 0.8, 0.8, 1), cgvColor(0.0, 0, 0, 1), 0);
-	  defaultMat.apply();
-
-	glPopMatrix (); // restore the modelview matrix 
-  
+	glPopMatrix (); 
 }
 

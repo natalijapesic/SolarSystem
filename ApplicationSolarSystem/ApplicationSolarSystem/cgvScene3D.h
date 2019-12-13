@@ -16,6 +16,7 @@
 #endif
 
 #include "cgvLight.h"
+#include "Planet.h"
 
 #define nbScenes 5
 
