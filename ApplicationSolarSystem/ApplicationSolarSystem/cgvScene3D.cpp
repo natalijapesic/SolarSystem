@@ -34,6 +34,9 @@ cgvScene3D::cgvScene3D () {
 =======
 	selectedScene = 1; 
 	instace_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 
@@ -90,11 +93,14 @@ void cgvScene3D::render(void) {
 
 	  if (axes) draw_axes();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	  glPushMatrix();
 	  Earth->draw();
 	  Mercury->draw();
 	  glPopMatrix();
 =======
+=======
+>>>>>>> Stashed changes
 
 	  glPushMatrix();
 	 
