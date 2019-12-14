@@ -37,7 +37,18 @@ void cgvMaterial::apply(void) {
 
 // set the color (0.0, 0.0, 0.0) as emission color (the object is not a light source )
 
+	GLfloat ak[3] = { Ka[0], Ka[1], Ka[2] };
+	GLfloat dk[3] = { Kd[0], Kd[1], Kd[2] };
+	GLfloat sk[3] = { Ks[0], Ks[1], Ks[2] };
 
+	glMaterialfv(GL_FRONT, GL_AMBIENT, ak);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, dk);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, sk);
+
+	glMaterialf(GL_FRONT, GL_SHININESS, Ns);
+
+	float color[] = { 0.0,0.0,0.0 };
+	glMaterialfv(GL_FRONT, GL_EMISSION, color);
 }
 
 void cgvMaterial::set(cgvColor _Ka, cgvColor _Kd, cgvColor _Ks, double _Ns) {

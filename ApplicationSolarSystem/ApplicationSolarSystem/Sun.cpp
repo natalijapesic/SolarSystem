@@ -15,7 +15,9 @@ void Sun::draw()
 	glPushMatrix();
 
 	GLUquadric* sphere;
-
+	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(240, 240, 240, 1), cgvColor(0, 0, 0, 1), cgvColor(0, 0, 0, 1), 1, 0, 0);
+	light.switchOn();
+	light.apply();
 	//unsigned char* image;
 	//unsigned int width, height;
 	//// load the BMP image in memory

@@ -41,6 +41,12 @@ void Planet::draw()
 
 	glColor3f(0.0, 1.0, 0.0);
 	gluQuadricDrawStyle(sphere, GLU_FILL);
+
+	cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
+		cgvColor(1, 1, 1),
+		cgvColor(1, 1, 1), 50);
+	material->apply();
+
 	texture.apply();
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);

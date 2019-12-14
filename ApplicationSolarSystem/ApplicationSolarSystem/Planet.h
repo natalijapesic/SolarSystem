@@ -24,7 +24,7 @@
 #include "cgvLight.h"
 #include "cgvTexture.h"
 #include "cgvColor.h"
-
+#include "cgvMaterial.h"
 /*dimenzije, slicica, prstenje i meseci, boje za select, rotacija oko svoje ose
 kretanje : putanja, brzina, udaljenost od sunca*/
 

@@ -28,7 +28,7 @@ cgvScene3D::cgvScene3D () {
 
 	char image[] = "..\\..\\textures\\2k_earth_daymap.bmp";
 
-	Mercury = new Planet(0.3, "..\\..\\textures\\2k_mercury.bmp", 80, 14, 3, cgvColor(1, 0, 0));
+	Mercury = new Planet(3, "..\\..\\textures\\2k_mercury.bmp", 80, 14, 3, cgvColor(1, 0, 0));
 	Earth = new Planet(6,"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, 90, 23, 15, cgvColor(1, 0, 0));
 
 	instace_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
@@ -86,6 +86,12 @@ void cgvScene3D::render(void) {
   
 	glPushMatrix(); 
 
+
+	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
+	light.switchOn();
+	light.apply();
+
+
 	  if (axes) draw_axes();
 
 	  Earth->draw();
@@ -100,8 +106,8 @@ void cgvScene3D::render(void) {
 	  glPopMatrix();
 
 
-	  
-
+	  //
+	//delete material;
 
 	glPopMatrix (); 
 }
