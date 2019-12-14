@@ -16,7 +16,10 @@
 #endif
 
 #include "cgvLight.h"
+#include "Constants.h"
+#include "Sun.h"
 #include "Planet.h"
+
 
 #define nbScenes 5
 
@@ -35,6 +38,8 @@ class cgvScene3D {
 		Planet *Mercury, *Venus, *Earth, *Mars, *Jupier, *Saturn, *Uran, *Neptun;
 
 	public:
+
+		Sun* instace_sun;
 		// Default constructor and destructor
 		cgvScene3D();
 		~cgvScene3D();

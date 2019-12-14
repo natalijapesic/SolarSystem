@@ -69,6 +69,7 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 	 case 'D': // Section F: decrease by 0.1 the R component of the diffuse coefficient of the material. 
 		 break;
 	 case 's': // Section F: increase by 0.1 the R component of the specular coefficient of the material. 
+		 interface.scene.instace_sun->inc_angle();
 		 break;
 	 case 'S': // Section F: decrease by 0.1 the R component of the specular coefficient of the material. 
 		 break;

@@ -12,13 +12,33 @@
 
 #endif
 
-
 #include "cgvLight.h"
 #include "cgvTexture.h"
 #include "cgvColor.h"
+
+#include "Constants.h"
 class Sun
 {
-	float radius; //Radius: 695,500 km
-	float rotation_speed;
-	float rotate_angle;
+private:
+
+	const float initialRadius = 695500;
+
+
+	float angle;
+	cgvColor color;
+	float radius;
+
+	unsigned int textureID;
+	char image_path[200];
+
+
+public:		
+	
+	Sun(cgvColor color);
+
+	void draw();
+
+	float get_angle() { return angle; }
+	void inc_angle() { angle += scaleRadius; }
+
 };

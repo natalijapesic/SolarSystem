@@ -28,6 +28,7 @@
     <ClInclude Include="cgvPoint3D.h" />
     <ClInclude Include="cgvScene3D.h" />
     <ClInclude Include="cgvTexture.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Sun.h" />
   </ItemGroup>

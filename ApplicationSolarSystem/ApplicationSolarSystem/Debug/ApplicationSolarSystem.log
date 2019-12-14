@@ -1,4 +1,10 @@
 ﻿  cgvScene3D.cpp
+<<<<<<< Updated upstream
 D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvPoint3D.h(31,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-X>' when no variable is declared
 D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvColor.h(24,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-R>' when no variable is declared
   ApplicationSolarSystem.vcxproj -> D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\ApplicationSolarSystem\Debug\ApplicationSolarSystem.exe
+=======
+C:\Solar System\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvPoint3D.h(31,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-X>' when no variable is declared
+C:\Solar System\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvColor.h(24,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-R>' when no variable is declared
+  ApplicationSolarSystem.vcxproj -> C:\Solar System\SolarSystem\ApplicationSolarSystem\Debug\ApplicationSolarSystem.exe
+>>>>>>> Stashed changes
