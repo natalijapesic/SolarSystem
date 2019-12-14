@@ -37,7 +37,7 @@ void Sun::draw()
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
-	gluSphere(sphere, this->radius/100, 32, 16);
+	gluSphere(sphere, this->radius, 32, 16);
 
 	glPopMatrix();
 
