@@ -3,7 +3,7 @@
 
 Sun::Sun(cgvColor color)
 {
-	char image[]= "C:/Solar System/SolarSystem/textures/sun.bmp";
+	char image[]= "..\\..\\textures\\sun.bmp";
 	strcpy(this->image_path, image);
 	this->angle = (360 / (30 * 24))*scaleHours;
 	this->color = color;
@@ -37,7 +37,7 @@ void Sun::draw()
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
-	gluSphere(sphere, this->radius, 32, 16);
+	gluSphere(sphere, this->radius/10, 32, 16);
 
 	glPopMatrix();
 
