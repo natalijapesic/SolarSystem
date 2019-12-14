@@ -29,6 +29,7 @@
     <ClInclude Include="cgvScene3D.h" />
     <ClInclude Include="cgvTexture.h" />
     <ClInclude Include="Planet.h" />
+    <ClInclude Include="Sun.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bmp.cpp" />
@@ -42,6 +43,7 @@
     <ClCompile Include="cgvTexture.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="SS.cpp" />
+    <ClCompile Include="Sun.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
