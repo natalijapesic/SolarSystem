@@ -30,7 +30,7 @@ void Planet::draw()
 	glTranslatef(x, 0, y);
 
 
-	glRotatef(23.5, 0, 1, 0);
+	glRotatef(90-23.5, 1, 0, 0);
 	glRotatef(this->rotate_angle, 0, 0, 1);
 	
 	GLUquadric* sphere;

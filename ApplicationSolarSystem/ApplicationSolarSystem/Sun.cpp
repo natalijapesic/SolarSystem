@@ -16,25 +16,27 @@ void Sun::draw()
 
 	GLUquadric* sphere;
 
-	unsigned char* image;
-	unsigned int width, height;
-	// load the BMP image in memory
-	image = loadBMPRaw(this->image_path, width, height, true);
+	//unsigned char* image;
+	//unsigned int width, height;
+	//// load the BMP image in memory
+	//image = loadBMPRaw(this->image_path, width, height, true);
 
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
+	//glGenTextures(1, &textureID);
+	//glBindTexture(GL_TEXTURE_2D, textureID);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	cgvTexture texture(this->image_path);
+	
 	sphere = gluNewQuadric();
-	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
 
 	glColor3f(0, 1, 1);
 	gluQuadricDrawStyle(sphere, GLU_FILL);
-	glBindTexture(GL_TEXTURE_2D, textureID);
+	texture.apply();
+	//glBindTexture(GL_TEXTURE_2D, textureID);
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
 	gluSphere(sphere, this->radius/10, 32, 16);

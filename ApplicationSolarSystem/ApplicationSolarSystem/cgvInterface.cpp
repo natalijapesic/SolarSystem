@@ -15,8 +15,8 @@ cgvInterface::~cgvInterface () {}
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
-	interface.camera.set(CGV_PARALLEL, cgvPoint3D(3.0,2.0,4),cgvPoint3D(0,0,0),cgvPoint3D(0,1.0,0),
-		                                -1*4.5, 1*4.5, -1*4.5, 1*4.5, -1*3, 200);
+	interface.camera.set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
+		                                -1*50, 1*50, -1*25, 1*25, -1*0, 600);
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
