@@ -13,6 +13,10 @@
 #else
 
 #include <GL/glut.h>
+#include <string.h>
+
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #endif
 
@@ -28,17 +32,18 @@ kretanje : putanja, brzina, udaljenost od sunca*/
 
 class Planet {
 private:
-	float radius;
+	float radius;//the radios of a planet
+
 	unsigned int textureID;
-	char* image_path;
+	char image_path[200];//NEPOTREBNO
 	//rings data struct
 	//moons data struct
 		
 	cgvColor select;
-	float orbitA, orbitB;
+	float orbit_radius;
 
 	float orbital_speed;
-	float orbit_pos;
+	float orbit_angle;
 
 	float rotation_speed;
 	float rotate_angle;
@@ -46,7 +51,7 @@ private:
 
 
 public:
-	Planet(float _radius, char* image, float _orbitA, float _orbitB, float _orbital_speed, float _rotational_speed, cgvColor _select);
+	Planet(float _radius,const char image[200], float _orbit_radius, float _orbital_speed, float _rotational_speed, cgvColor _select);
 	void draw();
 	void orbith();
 	void move(bool direction);

@@ -20,6 +20,8 @@
 
 #define nbScenes 5
 
+
+
 class cgvScene3D {
 	public:
 		int Scene[nbScenes];
@@ -30,7 +32,7 @@ class cgvScene3D {
 
 		bool axes;
 		int selectedScene;
-
+		Planet *Mercury, *Venus, *Earth, *Mars, *Jupier, *Saturn, *Uran, *Neptun;
 
 	public:
 		// Default constructor and destructor
@@ -48,6 +50,7 @@ class cgvScene3D {
 		bool get_axes() {return axes;};
 		void set_axes(bool _axes){axes = _axes;};
 
+		void rotateEarth();
 };
 
 #endif

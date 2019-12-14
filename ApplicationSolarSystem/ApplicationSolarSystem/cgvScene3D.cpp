@@ -23,7 +23,13 @@ cgvScene3D::cgvScene3D () {
 	Scene_Name[3] = (char*)"spotlight";
 	Scene_Name[4] = (char*)"texture";
 
-	selectedScene = 1; 
+	selectedScene = 1;
+
+	char image[] = "..\\..\\textures\\2k_earth_daymap.bmp";
+
+	Mercury = new Planet(0.3, "..\\..\\textures\\2k_mercury.bmp", 1, 14, 3, cgvColor(1, 0, 0));
+	Earth = new Planet(0.6,"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, 4, 23, 15, cgvColor(1, 0, 0));
+
 }
 
 cgvScene3D::~cgvScene3D() {
@@ -78,11 +84,16 @@ void cgvScene3D::render(void) {
 	glPushMatrix(); 
 
 	  if (axes) draw_axes();
-	  char image[] = "D:/VII semestar Jaen/Computer Graphics and visualization/project/SolarSystem/textures/2k_earth_daymap.bmp";
-	  Planet Earth(2, image, 4, 5, 23, 15, cgvColor(1, 0, 0));
-	  Earth.draw();
-	  
-
+	  glPushMatrix();
+	  Earth->draw();
+	  Mercury->draw();
+	  glPopMatrix();
 	glPopMatrix (); 
+}
+
+void cgvScene3D::rotateEarth()
+{
+	Earth->move(true);
+	Mercury->move(true);
 }
 

@@ -85,7 +85,9 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 		 break;
 	 case 'Y': // Section G: decrease by 0.2 the spotlight in the Y axis
 		 break;
-
+	 case 'r':
+		 interface.scene.rotateEarth();
+		 break;
 
     case 'a': // enable/disable the visualization of the axes
 			interface.scene.set_axes(interface.scene.get_axes()?false:true);
