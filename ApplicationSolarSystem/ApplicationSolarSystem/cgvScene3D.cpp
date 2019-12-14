@@ -23,7 +23,7 @@ cgvScene3D::cgvScene3D () {
 	Scene_Name[3] = (char*)"spotlight";
 	Scene_Name[4] = (char*)"texture";
 
-<<<<<<< Updated upstream
+
 	selectedScene = 1;
 
 	char image[] = "..\\..\\textures\\2k_earth_daymap.bmp";
@@ -31,13 +31,9 @@ cgvScene3D::cgvScene3D () {
 	Mercury = new Planet(0.3, "..\\..\\textures\\2k_mercury.bmp", 1, 14, 3, cgvColor(1, 0, 0));
 	Earth = new Planet(0.6,"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, 4, 23, 15, cgvColor(1, 0, 0));
 
-=======
 	selectedScene = 1; 
 	instace_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 }
 
 cgvScene3D::~cgvScene3D() {
@@ -92,15 +88,11 @@ void cgvScene3D::render(void) {
 	glPushMatrix(); 
 
 	  if (axes) draw_axes();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	  glPushMatrix();
+
 	  Earth->draw();
 	  Mercury->draw();
 	  glPopMatrix();
-=======
-=======
->>>>>>> Stashed changes
+
 
 	  glPushMatrix();
 	 
@@ -112,7 +104,7 @@ void cgvScene3D::render(void) {
 
 	  
 
->>>>>>> Stashed changes
+
 	glPopMatrix (); 
 }
 
