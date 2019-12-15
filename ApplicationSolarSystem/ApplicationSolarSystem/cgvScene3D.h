@@ -54,7 +54,8 @@ class cgvScene3D {
 		// Methods
 		// method with the OpenGL calls to render the scene
     void render();
-
+	void natalija();
+	void marija();
 		bool get_axes() {return axes;};
 		void set_axes(bool _axes){axes = _axes;};
 

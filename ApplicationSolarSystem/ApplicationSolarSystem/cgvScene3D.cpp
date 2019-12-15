@@ -82,6 +82,7 @@ void cgvScene3D::render(void) {
   
 	glPushMatrix(); 
 
+	int scena = 0;
 
 	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
 	light.switchOn();
@@ -89,6 +90,7 @@ void cgvScene3D::render(void) {
 
 
 	  if (axes) draw_axes();
+
 
 	  Mercury->draw();
 	  Earth->draw();
@@ -106,6 +108,14 @@ void cgvScene3D::render(void) {
 	//delete material;
 
 	glPopMatrix (); 
+}
+
+void cgvScene3D::natalija()
+{
+}
+
+void cgvScene3D::marija()
+{
 }
 
 void cgvScene3D::rotateEarth()
