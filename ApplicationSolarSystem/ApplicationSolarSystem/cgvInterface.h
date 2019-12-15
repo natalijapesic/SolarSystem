@@ -29,8 +29,8 @@ class cgvInterface {
 		int height_window;  // initial height of the display window
 
 		cgvScene3D scene; // scene to be rendered in the display window defined by cgvInterface. 
-		cgvCamera camera; // Camera to visualize the scene
-		
+		cgvCamera camera[4]; // Camera to visualize the scene
+		int current_cam;
 	public:
 		// Default constructor and destructor
 		cgvInterface();
@@ -54,7 +54,7 @@ class cgvInterface {
 			                       int _pos_X, int _pos_Y, // init position of the display window
 													 string _title // title of the display window
 													 ); 
-		void create_menu(); // Create a menu that is handle with the right button of the mouse. 
+		//void create_menu(); // Create a menu that is handle with the right button of the mouse. 
 
 		void init_callbacks(); // init all the callbacks
 

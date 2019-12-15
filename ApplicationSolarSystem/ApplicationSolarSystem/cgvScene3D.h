@@ -27,16 +27,16 @@
 
 
 class cgvScene3D {
-	public:
+	public:/*
 		int Scene[nbScenes];
-		char *Scene_Name[nbScenes];
+		char *Scene_Name[nbScenes];*/
 
 	protected:
 		// Attributes
 
-		bool axes;
-		int selectedScene;
-		Planet *Mercury, *Venus, *Earth, *Mars, *Jupier, *Saturn, *Uran, *Neptun;
+		bool axes;/*
+		int selectedScene;*/
+		Planet *Mercury, *Venus, *Earth, *Mars, *Jupiter, *Saturn, *Uran, *Neptun;
 		
 
 	public:

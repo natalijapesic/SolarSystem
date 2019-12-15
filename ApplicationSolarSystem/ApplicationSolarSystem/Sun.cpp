@@ -7,7 +7,7 @@ Sun::Sun(cgvColor color)
 	strcpy(this->image_path, image);
 	this->angle = (360 / (30 * 24))*scaleHours;
 	this->color = color;
-	this->radius = sun_radius / scaleRadius;
+	this->radius = scaleSize(sun_radius) / scaleRadius;
 }
 
 void Sun::draw()
@@ -28,7 +28,7 @@ void Sun::draw()
 
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
-	gluSphere(sphere, this->radius / 10, 32, 16);
+	gluSphere(sphere, this->radius, 32, 16);
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);

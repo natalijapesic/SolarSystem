@@ -6,7 +6,7 @@ Planet::Planet(double _radius, const char image[200], double _orbit_radius, doub
 {
 	//set parameters
 	this->radius = _radius;
-	this->orbit_radius = _orbit_radius;
+	this->orbit_radius = _orbit_radius + sun_radius; //distance from the sun + sun radius = distance from the center of the sun
 	this->orbital_speed = _speed;
 	this->rotation_speed = _rotational_speed;
 	this->select = _select;
@@ -28,7 +28,7 @@ void Planet::draw()
 	float x = orbit_radius * sin( M_PI* 2 * this->orbit_angle / 360) /scaleRadius;
 	float y = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
 	glTranslatef(x, 0, y);
-	printf("%f, %f\n", x, y);
+	//printf("%f, %f\n", x, y);
 
 	glRotatef(90-23.5, 1, 0, 0);
 	glRotatef(this->rotate_angle, 0, 0, 1);
@@ -51,7 +51,7 @@ void Planet::draw()
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
 	gluSphere(sphere, radius/scaleRadius, 32, 16);
-	printf("%f\n", radius / scaleRadius);
+	//printf("%f\n", radius / scaleRadius);
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);

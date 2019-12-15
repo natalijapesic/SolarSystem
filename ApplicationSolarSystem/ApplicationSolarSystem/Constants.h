@@ -3,7 +3,7 @@
 #define MYLIB_CONSTANTS_H 1
 
 #include "cgvColor.h"
-
+#include <math.h>
 //cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),   MIDDLE
 //- 1 * 50, 1 * 50, -1 * 25, 1 * 25, -1 * 0, 600)
 
@@ -14,7 +14,30 @@
 	//radius of sun is 695,500km...km == cm ==> valueHere=659,500/1000 
 
 static const float scaleRadius = 10000.0f;
-static const float scaleHours = 100;
+static float scaleHours = 200;
+static const bool scale = true;
+
+static double scaleSize(double size)
+{//give the real size here(|)
+	if (scale)
+	{
+		if (size < pow(10, 6))//planets and the sun
+		{
+			return size;
+		}
+		else if (size < pow(10, 8))// distances
+		{
+			return size / 10;
+		}
+		else if (size < pow(10, 10))
+		{
+			return size / 1000;
+		}
+		else return size / 5000;
+	}
+	else
+		return size;
+}
 
 #pragma region Sun
 static const float sun_radius = 695500;
@@ -93,10 +116,6 @@ static const double comet_speed = 100 * 3600 * scaleHours / scaleRadius; // km/s
 static const double min_sun_distance = 5000000000;
 static const double middle_distance = 228000000;
 #pragma endregion
-
-
-
-
 
 #endif
 

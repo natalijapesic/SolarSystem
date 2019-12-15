@@ -16,8 +16,13 @@ static int x = 0;
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
-	interface.camera.set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
+	interface.current_cam = 1;
+
+	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
 		                                -1*70, 1*70, -1*35, 1*35, -1*0, 600);
+	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 250), cgvPoint3D(0, 0, 250), cgvPoint3D(0, 1.0, 0),
+		-1 * 250, 1 * 250, -1 * 125, 1 * 125, -1 * 0, 50000 * 2);
+
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
@@ -36,7 +41,7 @@ void cgvInterface::configure_environment(int argc, char** argv,
   glutInitWindowPosition(_pos_X,_pos_Y);
 	glutCreateWindow(_title.c_str());
 
-	create_menu();
+	//create_menu();
 
 	glEnable(GL_DEPTH_TEST); // enable the removal of hidden surfaces by using the z-buffer
   glClearColor(1.0,1.0,1.0,0.0); // define the background color of the window
@@ -49,14 +54,14 @@ void cgvInterface::configure_environment(int argc, char** argv,
   create_world(); // create the world (scene) to be rendered in the window
 }
 
-void cgvInterface::create_menu() {
-	int menu_id = glutCreateMenu(menuHandle);
-	for (int i = 0; i<nbScenes; ++i) {
-		glutAddMenuEntry(interface.scene.Scene_Name[i], interface.scene.Scene[i]);
-	}
-
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
-}
+//void cgvInterface::create_menu() {
+//	int menu_id = glutCreateMenu(menuHandle);
+//	for (int i = 0; i<nbScenes; ++i) {
+//		glutAddMenuEntry(interface.scene.Scene_Name[i], interface.scene.Scene[i]);
+//	}
+//
+//	glutAttachMenu(GLUT_RIGHT_BUTTON);
+//}
 
 
 void cgvInterface::init_rendering_loop() {
@@ -73,6 +78,12 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 		 interface.scene.instance_sun->inc_angle();
 		 break;
 	 case 'S': // Section F: decrease by 0.1 the R component of the specular coefficient of the material. 
+		 scaleHours -= 10;
+		 printf("%f\n", scaleHours);
+		 break;
+	 case 'F':
+		 scaleHours += 10;
+		 printf("%f\n", scaleHours);
 		 break;
 	 case 'p': // Section F: increase by 10 the phong exponent of the material. 
 		 break;
@@ -81,8 +92,6 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 
 	 case 'x': // Section G: increase by 0.2 the spotlight in the X axis
 	
-		 x++;
-		 printf("%d", x);
 		 break;
 	 case 'X': // Section G: decrease by 0.2 the spotlight in the X axis
 		 break;
@@ -114,7 +123,7 @@ void cgvInterface::set_glutReshapeFunc(int w, int h) {
   interface.set_height_window(h);
 
   // Set up the kind of projection to be used
-  interface.camera.apply();
+  interface.camera[interface.current_cam].apply();
 
 }
 
@@ -124,7 +133,7 @@ void cgvInterface::set_glutDisplayFunc() {
 	// set up the viewport
 	glViewport(0, 0, interface.get_width_window(), interface.get_height_window());
 	// Apply the camera and projection parameters
-	interface.camera.apply();
+	interface.camera[interface.current_cam].apply();
 
 	// Render the scene
 	interface.scene.render();
