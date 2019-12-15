@@ -41,8 +41,7 @@ class cgvScene3D {
 
 	public:
 		Sun* instance_sun;
-		Comet* comets_rain[10];
-		Comet* c = new Comet();
+		Comet* comets_rain[1000];
 		// Default constructor and destructor
 		cgvScene3D();
 		~cgvScene3D();

@@ -14,23 +14,6 @@
 cgvScene3D::cgvScene3D () {
 	axes = true;
 
-	/*Scene[0] = 1;
-	Scene[1] = 2;
-	Scene[2] = 3;
-	Scene[3] = 4;
-	Scene[4] = 5;
-
-	Scene_Name[0] = (char*)"blue quad";
-	Scene_Name[1] = (char*)"red quad";
-	Scene_Name[2] = (char*)"mesh of quads";
-	Scene_Name[3] = (char*)"spotlight";
-	Scene_Name[4] = (char*)"texture";
-
-
-	selectedScene = 1;*/
-
-	//char image[] = "..\\..\\textures\\2k_earth_daymap.bmp";
-
 	Mercury = new Planet(scaleSize(mercury_radius), "..\\..\\textures\\2k_mercury.bmp", scaleSize(mercury_orbit_radius), mercury_orbit_rotation, mercury_self_rotatin, cgvColor(1, 0, 0));
 	Venus = new Planet(scaleSize(venus_radius), "..\\..\\textures\\2k_venus_surface.bmp", scaleSize(venus_orbit_radius), venus_orbit_rotation, venus_self_rotatin, cgvColor(1, 0, 0));
 	Earth = new Planet(scaleSize(earth_radius),"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, scaleSize(earth_orbit_radius), earth_orbit_rotation, earth_self_rotatin, cgvColor(1, 0, 0));
@@ -41,7 +24,7 @@ cgvScene3D::cgvScene3D () {
 	Neptun = new Planet(scaleSize(neptun_radius), "..\\..\\textures\\2k_neptune.bmp", scaleSize(neptun_orbit_radius), neptun_orbit_rotation, neptun_self_rotatin, cgvColor(1, 0, 0));
 	
 	instance_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1000; i++)
 		comets_rain[i] = new Comet();
 }
 
@@ -83,9 +66,6 @@ void cgvScene3D::render(void) {
 	marija();
 }
 
-void cgvScene3D::natalija()
-{
-}
 
 void cgvScene3D::marija()
 {
@@ -109,24 +89,11 @@ void cgvScene3D::marija()
 	Uran->draw();
 	Neptun->draw();
 
-	  Mercury->draw();
-	  Earth->draw();
-
-	glRotated(instance_sun->get_angle(), 0, 1, 0);
+	instance_sun->draw_space();
 	instance_sun->draw();
-
-	  glPushMatrix();
-	 
-	  glRotated(instance_sun->get_angle(), 0, 1, 0);
-	  instance_sun->draw();
-	  
-	  glPopMatrix();
-
-	glRotated(instance_sun->get_angle(), 0, 1, 0);
-	//instance_sun->draw();
-
-	  //
-	//delete material;
+	comet_angle *= -1;
+	for (int i = 0; i < 500; i++)
+		comets_rain[i]->draw(comet_angle*rand()%700, rand()%700, comet_angle * rand()%1500);
 
 	glPopMatrix (); 
 }
@@ -135,9 +102,7 @@ void cgvScene3D::natalija()
 {
 }
 
-void cgvScene3D::marija()
-{
-}
+
 
 void cgvScene3D::rotateEarth()
 {

@@ -13,8 +13,8 @@
 	//variables
 	//radius of sun is 695,500km...km == cm ==> valueHere=659,500/1000 
 
-static const float scaleRadius = 10000.0f;
-static float scaleHours = 100;
+static const double scaleRadius = 10000.0f;
+static double scaleHours = 1;
 static const bool scale = true;
 
 static double scaleSize(double size)
@@ -111,11 +111,16 @@ static const double neptun_orbit_rotation = 60190.03; //days to rotate around th
 
 #pragma region Comet
 static const double comet_radius = 100;
-static const double comet_tail = 10000000;
-static const double comet_speed = 100 * 3600 * scaleHours / scaleRadius; // km/s
-static const double min_sun_distance = 5000000000;
-static const double middle_distance = 228000000;
+static const double comet_speed = 100* 3600* scaleHours / scaleRadius; // km/s
+static const double middle_distance = 22800000;
 static int comet_angle = 1;
+static bool rotate_comet = true;
+#pragma endregion
+
+#pragma region Space
+static double space_radius() {
+	return 5000;
+}
 #pragma endregion
 
 #endif

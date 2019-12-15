@@ -16,18 +16,12 @@ static int x = 0;
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
-<<<<<<< Updated upstream
-	interface.current_cam = 1;
+	interface.current_cam = 0;
 
-	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
-		                                -1*70, 1*70, -1*35, 1*35, -1*0, 600);
-	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 250), cgvPoint3D(0, 0, 250), cgvPoint3D(0, 1.0, 0),
-		-1 * 250, 1 * 250, -1 * 125, 1 * 125, -1 * 0, 50000 * 2);
-
-=======
-	interface.camera.set(CGV_PARALLEL, cgvPoint3D(200,0,0),cgvPoint3D(0,0,0),cgvPoint3D(0,1.0,0),
-		                                -1*50, 1*50, -1*25, 1*25, -1*0, 600);
->>>>>>> Stashed changes
+	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(500,0,0),cgvPoint3D(0,0,50),cgvPoint3D(0,1, 0),
+		                                -1*500, 1*500, -1*250, 1*250, -1*0, 6000);
+	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 0), cgvPoint3D(0, 0, 250), cgvPoint3D(0, 1.0, 0),
+		-1 * 2500, 1 * 2500, -1 * 1250, 1 * 1250, -1 * 0, 5000000 * 2);
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
@@ -58,15 +52,6 @@ void cgvInterface::configure_environment(int argc, char** argv,
 
   create_world(); // create the world (scene) to be rendered in the window
 }
-
-//void cgvInterface::create_menu() {
-//	int menu_id = glutCreateMenu(menuHandle);
-//	for (int i = 0; i<nbScenes; ++i) {
-//		glutAddMenuEntry(interface.scene.Scene_Name[i], interface.scene.Scene[i]);
-//	}
-//
-//	glutAttachMenu(GLUT_RIGHT_BUTTON);
-//}
 
 
 void cgvInterface::init_rendering_loop() {
@@ -101,9 +86,10 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 	 case 'X': // Section G: decrease by 0.2 the spotlight in the X axis
 		 break;
 	 case 'y': // Section G: increase by 0.2 the spotlight in the Y axis
-		 interface.scene.c->move_comet();
-		 interface.scene.c->start_rotation();
-		 interface.scene.c->print();
+		 if(rotate_comet)
+		 for (int i = 0; i < 500; i++)
+			interface.scene.comets_rain[i]->move_comet();
+		 interface.scene.instance_sun->inc_angle();
 		 break;
 	 case 'Y': // Section G: decrease by 0.2 the spotlight in the Y axis
 		 break;

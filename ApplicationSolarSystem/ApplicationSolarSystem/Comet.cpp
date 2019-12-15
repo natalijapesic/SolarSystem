@@ -2,21 +2,19 @@
 
 Comet::Comet()
 {
-	this->radius = comet_radius / scaleRadius;
-	this->tail = comet_tail / scaleRadius;
+	this->radius = comet_radius*100/ scaleRadius;
 
 	comet_angle *= -1;
-	this->tail_angle = comet_angle * rand() % 180;
+	this->tail_angle = comet_angle*45.0f;
 
-	this->sun_distance = (min_sun_distance + rand()%1000)/scaleRadius;
+	this->sun_distance = (middle_distance+ rand()%1000)/scaleRadius;
+
+	this->sun_rotation = (360 / (30 * 24))*scaleHours;
 }
 
-void Comet::draw()
+void Comet::draw(float x, float y, float z)
 {
 	glPushMatrix();
-
-	GLUquadric* sphere = gluNewQuadric();
-
 
 	cgvLight light(GL_LIGHT1, cgvPoint3D(0, 0, 0), cgvColor(100, 100, 0), cgvColor(0, 0, 0), cgvColor(0, 0, 0), 1, 0, 0);
 	light.switchOn();
@@ -25,9 +23,10 @@ void Comet::draw()
 	cgvMaterial material(cgvColor(0, 0, 0), cgvColor(0, 0, 0), cgvColor(0, 0, 0), 1);
 	material.apply();
 
-	glRotatef(this->tail_angle, 0, 0, 1);
-	//glTranslatef(this->sun_distance, 0, 0);
-	glScalef(this->tail, 1, 1);
+	glRotated(sun_rotation, 0, 1, 0);
+	glTranslatef(this->sun_distance + x, y, z);
+
+	GLUquadric* sphere = gluNewQuadric();
 
 	gluSphere(sphere, this->radius, 10, 10);
 
@@ -38,13 +37,15 @@ void Comet::draw()
 
 void Comet::move_comet()
 {
-	sun_distance -= comet_speed;
+	if ((sun_distance > scaleSize(sun_radius+4000) / scaleRadius) && rotate_comet)
+	{
+		sun_distance -= comet_speed;
+		sun_rotation += (360 / (30 * 24)) * scaleHours;
+	}
+	else {
+		rotate_comet = false;
+		sun_distance += comet_speed;
+	}
+	
 }
 
-void Comet::start_rotation()
-{
-	if (sun_distance < middle_distance/scaleRadius)
-	{
-		tail_angle--;
-	}
-}

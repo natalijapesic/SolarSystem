@@ -24,13 +24,13 @@ private:
 	double tail;
 	double tail_angle;
 	double sun_distance;
+	double sun_rotation;
 
 public:
 	Comet();
 
-	void draw();
+	void draw(float x, float y, float z);
 	void move_comet();
-	void start_rotation();
 	void print(){
 		printf("sun d %f", sun_distance);
 		printf("angle %d", comet_angle);
