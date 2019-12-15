@@ -31,9 +31,7 @@ void Sun::draw()
 
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
-
-
-	gluSphere(sphere, this->radius, 32, 16);
+	gluSphere(sphere, this->radius, 100, 100);
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);

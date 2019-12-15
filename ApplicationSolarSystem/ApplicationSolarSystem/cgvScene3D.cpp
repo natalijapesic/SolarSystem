@@ -19,6 +19,7 @@ cgvScene3D::cgvScene3D () {
 	Earth = new Planet(scaleSize(earth_radius),"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, scaleSize(earth_orbit_radius), earth_orbit_rotation, earth_self_rotatin, cgvColor(1, 0, 0));
 	Mars = new Planet(scaleSize(mars_radius), "..\\..\\textures\\2k_mars.bmp", scaleSize(mars_orbit_radius), mars_orbit_rotation, mars_self_rotatin, cgvColor(1, 0, 0));
 	Jupiter = new Planet(scaleSize(jupiter_radius), "..\\..\\textures\\2k_jupiter.bmp", scaleSize(jupiter_orbit_radius), jupiter_orbit_rotation, jupiter_self_rotatin, cgvColor(1, 0, 0));
+	Jupiter->addMoon(scaleSize(1500)/scaleRadius, 67000 / scaleRadius, 4.2);
 	Saturn = new Planet(scaleSize(saturn_radius), "..\\..\\textures\\2k_saturn.bmp", scaleSize(saturn_orbit_radius), saturn_orbit_rotation, saturn_self_rotatin, cgvColor(1, 0, 0));
 	Uran = new Planet(scaleSize(uran_radius), "..\\..\\textures\\2k_uranus.bmp", scaleSize(uran_orbit_radius), uran_orbit_rotation, uran_self_rotatin, cgvColor(1, 0, 0));
 	Neptun = new Planet(scaleSize(neptun_radius), "..\\..\\textures\\2k_neptune.bmp", scaleSize(neptun_orbit_radius), neptun_orbit_rotation, neptun_self_rotatin, cgvColor(1, 0, 0));
@@ -61,8 +62,8 @@ void draw_axes(void) {
 }
 
 
+
 void cgvScene3D::render(void) {
-  
 	marija();
 }
 
@@ -71,11 +72,11 @@ void cgvScene3D::marija()
 {
 	glPushMatrix();
 
-	int scena = 0;
+	/*int scena = 0;*/
 
-	//cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
-	//light.switchOn();
-	//light.apply();
+	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
+	light.switchOn();
+	light.apply();
 
 
 	if (axes) draw_axes();
@@ -97,11 +98,9 @@ void cgvScene3D::marija()
 
 	glPopMatrix (); 
 }
-
 void cgvScene3D::natalija()
 {
 }
-
 
 
 void cgvScene3D::rotateEarth()

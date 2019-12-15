@@ -17,27 +17,7 @@ static const double scaleRadius = 10000.0f;
 static double scaleHours = 1;
 static const bool scale = true;
 
-static double scaleSize(double size)
-{//give the real size here(|)
-	if (scale)
-	{
-		if (size < pow(10, 6))//planets and the sun
-		{
-			return size;
-		}
-		else if (size < pow(10, 8))// distances
-		{
-			return size / 10;
-		}
-		else if (size < pow(10, 10))
-		{
-			return size / 1000;
-		}
-		else return size / 5000;
-	}
-	else
-		return size;
-}
+
 
 #pragma region Sun
 static const float sun_radius = 695500;
@@ -122,6 +102,31 @@ static double space_radius() {
 	return 5000;
 }
 #pragma endregion
+
+
+static double scaleSize(double size) //add divide by scale radius?
+{//give the real size here(|)
+	if (scale)
+	{
+		if (size <= earth_radius)//planets and the sun
+		{
+			return size*1.7;
+		}
+		else if (size <= sun_radius)//orbits of the planets nearer to the sun
+		{
+			return size;
+		}
+		else if (size <= saturn_orbit_radius)//orbits of the planets nearer to the sun
+		{
+			return size / 800;
+		}
+		else
+			return size / 2000;//orbits of the planets further from the sun
+	}
+	else
+		return size;
+}
+
 
 #endif
 

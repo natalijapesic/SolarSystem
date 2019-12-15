@@ -29,6 +29,13 @@
 /*dimenzije, slicica, prstenje i meseci, boje za select, rotacija oko svoje ose
 kretanje : putanja, brzina, udaljenost od sunca*/
 
+struct Moon {
+	double radius;
+	double distance;
+	double speed;
+	double current_angle;
+};
+
 
 
 class Planet {
@@ -50,14 +57,17 @@ private:
 	double orbital_speed;//days to orbit around the Sun
 	double orbit_angle;//the current position of the planet
 	
-
-
+	int moon_count;
+	Moon moons[4];
+	double ring_inner, ring_outer;
 
 public:
 	Planet(double _radius,const char image[200], double _orbit_radius, double _orbital_speed, double _rotational_speed, cgvColor _select);
 	void draw();
-	void move();
+	void drawMoon(int count);
 
+	void move();
+	void addMoon(double radius, double distance, double speed);
 };
 
 
