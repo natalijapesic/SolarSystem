@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿  Comet.cpp
   Planet.cpp
 D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvColor.h(24,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-R>' when no variable is declared
@@ -20,3 +21,10 @@ D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\App
   Generating Code...
 D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvScene3D.h(22,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   ApplicationSolarSystem.vcxproj -> D:\VII semestar Jaen\Computer Graphics and visualization\project\SolarSystem\ApplicationSolarSystem\Debug\ApplicationSolarSystem.exe
+=======
+﻿  cgvInterface.cpp
+C:\Solar System\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvPoint3D.h(31,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-X>' when no variable is declared
+C:\Solar System\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvColor.h(24,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-R>' when no variable is declared
+C:\Solar System\SolarSystem\ApplicationSolarSystem\ApplicationSolarSystem\cgvScene3D.h(22,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  ApplicationSolarSystem.vcxproj -> C:\Solar System\SolarSystem\ApplicationSolarSystem\Debug\ApplicationSolarSystem.exe
+>>>>>>> Stashed changes

@@ -9,12 +9,7 @@
 // Constructor methods -----------------------------------
 
 
-//Comet* c = new Comet();
-//c->draw();
-//
-///* for (int i = 0; i < 10; i++)
-//	 comets_rain[i]->draw();*/
-//	 //
+
 
 cgvScene3D::cgvScene3D () {
 	axes = true;
@@ -98,9 +93,9 @@ void cgvScene3D::marija()
 
 	int scena = 0;
 
-	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
-	light.switchOn();
-	light.apply();
+	//cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
+	//light.switchOn();
+	//light.apply();
 
 
 	if (axes) draw_axes();
@@ -114,18 +109,34 @@ void cgvScene3D::marija()
 	Uran->draw();
 	Neptun->draw();
 
-	glPushMatrix();
+	  Mercury->draw();
+	  Earth->draw();
 
 	glRotated(instance_sun->get_angle(), 0, 1, 0);
 	instance_sun->draw();
 
-	glPopMatrix();
+	  glPushMatrix();
+	 
+	  glRotated(instance_sun->get_angle(), 0, 1, 0);
+	  instance_sun->draw();
+	  
+	  glPopMatrix();
 
+	glRotated(instance_sun->get_angle(), 0, 1, 0);
+	//instance_sun->draw();
 
-	//
-  //delete material;
+	  //
+	//delete material;
 
-	glPopMatrix();
+	glPopMatrix (); 
+}
+
+void cgvScene3D::natalija()
+{
+}
+
+void cgvScene3D::marija()
+{
 }
 
 void cgvScene3D::rotateEarth()

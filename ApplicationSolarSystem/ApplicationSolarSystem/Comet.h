@@ -15,7 +15,8 @@
 #include <random>
 #include <iostream>
 #include "Constants.h"
-
+#include "cgvLight.h"
+#include "cgvMaterial.h"
 class Comet
 {
 private:
@@ -30,5 +31,10 @@ public:
 	void draw();
 	void move_comet();
 	void start_rotation();
+	void print(){
+		printf("sun d %f", sun_distance);
+		printf("angle %d", comet_angle);
+		printf(" speed %f", comet_speed);
+	}
 };
 

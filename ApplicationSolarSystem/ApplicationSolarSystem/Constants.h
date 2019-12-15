@@ -110,11 +110,12 @@ static const double neptun_orbit_rotation = 60190.03; //days to rotate around th
 #pragma endregion
 
 #pragma region Comet
-static const double comet_radius = 10;
-static const double comet_tail = 1000000;
+static const double comet_radius = 100;
+static const double comet_tail = 10000000;
 static const double comet_speed = 100 * 3600 * scaleHours / scaleRadius; // km/s
 static const double min_sun_distance = 5000000000;
 static const double middle_distance = 228000000;
+static int comet_angle = 1;
 #pragma endregion
 
 #endif

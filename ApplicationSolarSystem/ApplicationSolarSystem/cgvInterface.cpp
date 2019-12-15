@@ -16,6 +16,7 @@ static int x = 0;
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
+<<<<<<< Updated upstream
 	interface.current_cam = 1;
 
 	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
@@ -23,6 +24,10 @@ void cgvInterface::create_world(void) {
 	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 250), cgvPoint3D(0, 0, 250), cgvPoint3D(0, 1.0, 0),
 		-1 * 250, 1 * 250, -1 * 125, 1 * 125, -1 * 0, 50000 * 2);
 
+=======
+	interface.camera.set(CGV_PARALLEL, cgvPoint3D(200,0,0),cgvPoint3D(0,0,0),cgvPoint3D(0,1.0,0),
+		                                -1*50, 1*50, -1*25, 1*25, -1*0, 600);
+>>>>>>> Stashed changes
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
@@ -96,6 +101,9 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 	 case 'X': // Section G: decrease by 0.2 the spotlight in the X axis
 		 break;
 	 case 'y': // Section G: increase by 0.2 the spotlight in the Y axis
+		 interface.scene.c->move_comet();
+		 interface.scene.c->start_rotation();
+		 interface.scene.c->print();
 		 break;
 	 case 'Y': // Section G: decrease by 0.2 the spotlight in the Y axis
 		 break;
