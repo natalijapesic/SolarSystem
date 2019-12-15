@@ -14,7 +14,7 @@
 	//radius of sun is 695,500km...km == cm ==> valueHere=659,500/1000 
 
 static const float scaleRadius = 10000.0f;
-static float scaleHours = 200;
+static float scaleHours = 100;
 static const bool scale = true;
 
 static double scaleSize(double size)

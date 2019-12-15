@@ -66,7 +66,7 @@ void Planet::move()
 
 
 	this->rotate_angle +=360 * (double)scaleHours/rotation_speed;//rs - hours for the 
-
+	printf("%f\n", scaleHours);
 	this->orbit_angle+=360 * (double)scaleHours /(orbital_speed*24);//
 	
 }
