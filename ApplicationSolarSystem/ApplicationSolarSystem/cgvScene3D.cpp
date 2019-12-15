@@ -28,8 +28,8 @@ cgvScene3D::cgvScene3D () {
 
 	char image[] = "..\\..\\textures\\2k_earth_daymap.bmp";
 
-	Mercury = new Planet(3, "..\\..\\textures\\2k_mercury.bmp", 80, 14, 3, cgvColor(1, 0, 0));
-	Earth = new Planet(6,"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, 90, 23, 15, cgvColor(1, 0, 0));
+	Mercury = new Planet(1*mercury_radius, "..\\..\\textures\\2k_mercury.bmp", mercury_orbit_radius/10, mercury_orbit_rotation, mercury_self_rotatin, cgvColor(1, 0, 0));
+	Earth = new Planet(1*earth_radius,"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, earth_orbit_radius/10, earth_orbit_rotation, earth_self_rotatin, cgvColor(1, 0, 0));
 
 	instace_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
 
@@ -68,19 +68,6 @@ void draw_axes(void) {
 	glEnd();
 }
 
-void draw_quad() {
-
-	glNormal3f(0, 1, 0);
-	glBegin(GL_QUADS);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(0.0, 0.0, 5.0);
-		glVertex3f(5.0, 0.0, 5.0);
-		glVertex3f(5.0, 0.0, 0.0);
-	glEnd();
-
-
-}
-
 
 void cgvScene3D::render(void) {
   
@@ -94,8 +81,8 @@ void cgvScene3D::render(void) {
 
 	  if (axes) draw_axes();
 
-	  Earth->draw();
 	  Mercury->draw();
+	  Earth->draw();
 
 
 	  glPushMatrix();
@@ -114,7 +101,7 @@ void cgvScene3D::render(void) {
 
 void cgvScene3D::rotateEarth()
 {
-	Earth->move(true);
-	Mercury->move(true);
+	Earth->move();
+	Mercury->move();
 }
 

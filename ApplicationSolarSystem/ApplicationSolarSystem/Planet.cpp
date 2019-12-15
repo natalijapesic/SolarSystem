@@ -2,7 +2,7 @@
 
 
 
-Planet::Planet(float _radius, const char image[200], float _orbit_radius, float _speed, float _rotational_speed, cgvColor _select)
+Planet::Planet(double _radius, const char image[200], double _orbit_radius, double _speed, double _rotational_speed, cgvColor _select)
 {
 	//set parameters
 	this->radius = _radius;
@@ -25,10 +25,10 @@ void Planet::draw()
 	glPushMatrix();
 
 	//move the planet according to its orbit
-	float x = orbit_radius * sin( M_PI* 2 * this->orbit_angle / 360);
-	float y = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360);
+	float x = orbit_radius * sin( M_PI* 2 * this->orbit_angle / 360) /scaleRadius;
+	float y = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
 	glTranslatef(x, 0, y);
-
+	printf("%f, %f\n", x, y);
 
 	glRotatef(90-23.5, 1, 0, 0);
 	glRotatef(this->rotate_angle, 0, 0, 1);
@@ -50,24 +50,23 @@ void Planet::draw()
 	texture.apply();
 	gluQuadricTexture(sphere, TRUE);
 	gluQuadricNormals(sphere, GLU_SMOOTH);
-	gluSphere(sphere, radius, 32, 16);
-
+	gluSphere(sphere, radius/scaleRadius, 32, 16);
+	printf("%f\n", radius / scaleRadius);
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);
 }
 
-void Planet::orbith()
-{
-	//define the orbit
-}
 
-void Planet::move(bool direction)
+
+void Planet::move()
 {
 	//make it dance
 	//it moves in a period of time
-	this->rotate_angle +=rotation_speed;
 
-	this->orbit_angle+=orbital_speed;
+
+	this->rotate_angle +=360 * (double)scaleHours/rotation_speed;//rs - hours for the 
+
+	this->orbit_angle+=360 * (double)scaleHours /(orbital_speed*24);//
 	
 }

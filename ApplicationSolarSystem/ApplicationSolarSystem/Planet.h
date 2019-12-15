@@ -25,6 +25,7 @@
 #include "cgvTexture.h"
 #include "cgvColor.h"
 #include "cgvMaterial.h"
+#include "Constants.h"
 /*dimenzije, slicica, prstenje i meseci, boje za select, rotacija oko svoje ose
 kretanje : putanja, brzina, udaljenost od sunca*/
 
@@ -32,29 +33,30 @@ kretanje : putanja, brzina, udaljenost od sunca*/
 
 class Planet {
 private:
-	float radius;//the radios of a planet
+	
 
 	unsigned int textureID;
 	char image_path[200];//NEPOTREBNO
 	//rings data struct
 	//moons data struct
-		
+
 	cgvColor select;
-	float orbit_radius;
 
-	float orbital_speed;
-	float orbit_angle;
+	double radius;//the radius of a planet
+	double rotation_speed; //hours to rotate around itself
+	double rotate_angle;//the current angle of rotation of the planet
 
-	float rotation_speed;
-	float rotate_angle;
+	double orbit_radius;//distance of the sun
+	double orbital_speed;//days to orbit around the Sun
+	double orbit_angle;//the current position of the planet
+	
 
 
 
 public:
-	Planet(float _radius,const char image[200], float _orbit_radius, float _orbital_speed, float _rotational_speed, cgvColor _select);
+	Planet(double _radius,const char image[200], double _orbit_radius, double _orbital_speed, double _rotational_speed, cgvColor _select);
 	void draw();
-	void orbith();
-	void move(bool direction);
+	void move();
 
 };
 

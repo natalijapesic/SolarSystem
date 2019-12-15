@@ -11,12 +11,13 @@ cgvInterface::cgvInterface () {}
 
 cgvInterface::~cgvInterface () {}
 
+static int x = 0;
 
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
-	interface.camera.set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
-		                                -1*50, 1*50, -1*25, 1*25, -1*0, 600);
+	interface.camera.set(CGV_PARALLEL, cgvPoint3D(50000,0,750),cgvPoint3D(0,0,750),cgvPoint3D(0,1.0,0),
+		                                -1*750, 1*750, -1*375, 1* 375, -1*0, 50000*2);
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
@@ -79,6 +80,9 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 		 break;
 
 	 case 'x': // Section G: increase by 0.2 the spotlight in the X axis
+	
+		 x++;
+		 printf("%d", x);
 		 break;
 	 case 'X': // Section G: decrease by 0.2 the spotlight in the X axis
 		 break;
