@@ -19,6 +19,7 @@
 #include "Constants.h"
 #include "Sun.h"
 #include "Planet.h"
+#include "Comet.h";
 
 
 #define nbScenes 5
@@ -36,10 +37,12 @@ class cgvScene3D {
 		bool axes;
 		int selectedScene;
 		Planet *Mercury, *Venus, *Earth, *Mars, *Jupier, *Saturn, *Uran, *Neptun;
+		
 
 	public:
-
-		Sun* instace_sun;
+		Sun* instance_sun;
+		Comet* comets_rain[10];
+		
 		// Default constructor and destructor
 		cgvScene3D();
 		~cgvScene3D();

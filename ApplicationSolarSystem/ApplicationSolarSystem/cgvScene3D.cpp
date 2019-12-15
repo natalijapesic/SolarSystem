@@ -8,6 +8,14 @@
 
 // Constructor methods -----------------------------------
 
+
+//Comet* c = new Comet();
+//c->draw();
+//
+///* for (int i = 0; i < 10; i++)
+//	 comets_rain[i]->draw();*/
+//	 //
+
 cgvScene3D::cgvScene3D () {
 	axes = true;
 
@@ -31,8 +39,9 @@ cgvScene3D::cgvScene3D () {
 	Mercury = new Planet(1*mercury_radius, "..\\..\\textures\\2k_mercury.bmp", mercury_orbit_radius/10, mercury_orbit_rotation, mercury_self_rotatin, cgvColor(1, 0, 0));
 	Earth = new Planet(1*earth_radius,"..\\..\\textures\\2k_earth_daymap.bmp" /*image*/, earth_orbit_radius/10, earth_orbit_rotation, earth_self_rotatin, cgvColor(1, 0, 0));
 
-	instace_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
-
+	instance_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
+	for (int i = 0; i < 10; i++)
+		comets_rain[i] = new Comet();
 }
 
 cgvScene3D::~cgvScene3D() {
@@ -87,8 +96,8 @@ void cgvScene3D::render(void) {
 
 	  glPushMatrix();
 	 
-	  glRotated(instace_sun->get_angle(), 0, 1, 0);
-	  instace_sun->draw();
+	  glRotated(instance_sun->get_angle(), 0, 1, 0);
+	  instance_sun->draw();
 	  
 	  glPopMatrix();
 

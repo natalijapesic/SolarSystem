@@ -21,9 +21,6 @@ class Sun
 {
 private:
 
-	const float initialRadius = 695500;
-
-
 	float angle;
 	cgvColor color;
 	float radius;

@@ -16,8 +16,8 @@ static int x = 0;
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
-	interface.camera.set(CGV_PARALLEL, cgvPoint3D(50000,0,750),cgvPoint3D(0,0,750),cgvPoint3D(0,1.0,0),
-		                                -1*750, 1*750, -1*375, 1* 375, -1*0, 50000*2);
+	interface.camera.set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
+		                                -1*70, 1*70, -1*35, 1*35, -1*0, 600);
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
@@ -70,7 +70,7 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 	 case 'D': // Section F: decrease by 0.1 the R component of the diffuse coefficient of the material. 
 		 break;
 	 case 's': // Section F: increase by 0.1 the R component of the specular coefficient of the material. 
-		 interface.scene.instace_sun->inc_angle();
+		 interface.scene.instance_sun->inc_angle();
 		 break;
 	 case 'S': // Section F: decrease by 0.1 the R component of the specular coefficient of the material. 
 		 break;

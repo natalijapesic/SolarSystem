@@ -28,6 +28,7 @@
     <ClInclude Include="cgvPoint3D.h" />
     <ClInclude Include="cgvScene3D.h" />
     <ClInclude Include="cgvTexture.h" />
+    <ClInclude Include="Comet.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Sun.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="cgvPoint3D.cpp" />
     <ClCompile Include="cgvScene3D.cpp" />
     <ClCompile Include="cgvTexture.cpp" />
+    <ClCompile Include="Comet.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="SS.cpp" />
     <ClCompile Include="Sun.cpp" />

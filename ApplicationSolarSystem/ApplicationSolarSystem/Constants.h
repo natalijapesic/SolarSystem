@@ -4,12 +4,21 @@
 
 #include "cgvColor.h"
 
+//cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),   MIDDLE
+//- 1 * 50, 1 * 50, -1 * 25, 1 * 25, -1 * 0, 600)
+
+
 	//it is assumed that the sun revolves around its axis in 30 days
 	//the scaleHours is the variable which said how much time passed after one button click
 	//variables
 	//radius of sun is 695,500km...km == cm ==> valueHere=659,500/1000 
+
 static const float scaleRadius = 10000.0f;
 static const float scaleHours = 100;
+
+#pragma region Sun
+static const float sun_radius = 695500;
+#pragma endregion
 
 //Objects
 #pragma region Mercury
@@ -22,7 +31,7 @@ static const double mercury_orbit_rotation = 87.97; //days to rotate around the 
 #pragma endregion
 
 #pragma region Venus
-static const double venus_radius = 6051.8;//
+static const double venus_radius = 6051.8;
 static const double venus_orbit_radius = 108000000;
 static const double venus_self_rotatin = 5832;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double venus_orbit_rotation = 224.7; //days to rotate around the orbit
@@ -76,6 +85,15 @@ static const double neptun_self_rotatin = 16;//hours to rotate 360 around itself
 static const double neptun_orbit_rotation = 60190.03; //days to rotate around the orbit
 
 #pragma endregion
+
+#pragma region Comet
+static const double comet_radius = 10;
+static const double comet_tail = 1000000;
+static const double comet_speed = 100 * 3600 * scaleHours / scaleRadius; // km/s
+static const double min_sun_distance = 5000000000;
+static const double middle_distance = 228000000;
+#pragma endregion
+
 
 
 #endif
