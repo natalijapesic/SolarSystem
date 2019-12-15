@@ -20,6 +20,10 @@ static const float scaleHours = 100;
 static const float sun_radius = 695500;
 #pragma endregion
 
+#pragma region Sun
+static const float sun_radius = 695500;
+#pragma endregion
+
 //Objects
 #pragma region Mercury
 static const double mercury_radius = 2439.7;//the size of the planet 
@@ -93,6 +97,15 @@ static const double comet_speed = 100 * 3600 * scaleHours / scaleRadius; // km/s
 static const double min_sun_distance = 5000000000;
 static const double middle_distance = 228000000;
 #pragma endregion
+
+#pragma region Comet
+static const double comet_radius = 10;
+static const double comet_tail = 1000000;
+static const double comet_speed = 100 * 3600 * scaleHours / scaleRadius; // km/s
+static const double min_sun_distance = 5000000000;
+static const double middle_distance = 228000000;
+#pragma endregion
+
 
 
 
