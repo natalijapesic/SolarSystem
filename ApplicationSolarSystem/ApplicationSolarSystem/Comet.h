@@ -31,9 +31,10 @@ private:
 	double orbit_angle;
 
 public:
-	Comet(double _radius, double _orbit_radius, double _speed, double _orbital_speed, double _rotational_speed);
+	Comet(double _radius, double _orbit_radius, double _speed);
 
-	void draw();
+	void draw(double distance);
 
+	void move();
 };
 

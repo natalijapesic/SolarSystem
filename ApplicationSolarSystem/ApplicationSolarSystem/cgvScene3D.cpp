@@ -33,6 +33,9 @@ cgvScene3D::cgvScene3D () {
 	Neptun = new Planet(scaleSize(neptun_radius), "..\\..\\textures\\2k_neptune.bmp", scaleSize(neptun_orbit_radius), neptun_orbit_rotation, neptun_self_rotatin, val_color);
 	
 	instance_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
+	comets_rain[0] = new Comet(100.0, scaleSize(comet_orbit_radius + rand() % 100000), comet_orbit_rotation);
+	comets_rain[1] = new Comet(100.0, scaleSize(comet_orbit_radius + rand() % 100000), comet_orbit_rotation);
+	comets_rain[2] = new Comet(100.0, scaleSize(comet_orbit_radius + rand() % 100000), comet_orbit_rotation);
 }
 
 cgvScene3D::~cgvScene3D() {
@@ -80,14 +83,6 @@ void cgvScene3D::draw_axes(void) {
 
 void cgvScene3D::render(renderMode mode) {
   
-	marija();
-}
-
-
-
-
-void cgvScene3D::marija()
-{
 	glPushMatrix();
 
 	int scena = 0;
@@ -111,6 +106,10 @@ void cgvScene3D::marija()
 
 		instance_sun->draw_space();
 		instance_sun->draw();
+
+		comets_rain[0]->draw(-scaleSize(comet_orbit_radius+1000));
+		comets_rain[1]->draw(scaleSize(jupiter_orbit_radius));
+		comets_rain[2]->draw(scaleSize(-mars_orbit_radius+45236));
 
 
 
@@ -141,7 +140,7 @@ void cgvScene3D::marija()
 
 		gluQuadricTexture(sphere, TRUE);
 		gluQuadricNormals(sphere, GLU_SMOOTH);
-		gluSphere(sphere, sqrt(2)*furthest_point, 200, 200);
+		gluSphere(sphere, sqrt(2) * furthest_point, 200, 200);
 
 
 		space_light.switchOff();
@@ -173,14 +172,10 @@ void cgvScene3D::marija()
 		//}
 		//glEnd();
 
-		
-	}
-	glPopMatrix (); 
-}
-void cgvScene3D::natalija()
-{
-}
 
+	}
+	glPopMatrix();
+}
 
 void cgvScene3D::rotateEarth()
 {
@@ -192,5 +187,7 @@ void cgvScene3D::rotateEarth()
 	Saturn->move();
 	Uran->move();
 	Neptun->move();
+	for (int i = 0; i < 3; i++)
+		comets_rain[i]->move();
 }
 

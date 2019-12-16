@@ -44,9 +44,7 @@ void Planet::draw()
 
 	glPushMatrix();
 	glRotatef(this->rotate_angle, 0, 0, 1);
-	//static cgvTexture texture(this->image_path);
-	////cgvTexture texture(this->image_path);
-	//texture.apply();
+
 	cgvTexture texture(this->array_image, this->weight, this->height);
 	texture.apply();
 
@@ -168,10 +166,6 @@ void Planet::drawOrbit()
 
 void Planet::move()
 {
-	//make it dance
-	//it moves in a period of time
-
-
 	this->rotate_angle +=360 * (double)scaleHours/rotation_speed;//rs - hours for the 
 
 	this->orbit_angle+=360 * (double)scaleHours /(orbital_speed*24);//
@@ -203,50 +197,3 @@ void Planet::set_color(GLubyte _color[3])
 	this->select[2] = _color[2];
 }
 
-//void Mercury::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Venus::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Earth::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Mars::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Jupiter::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Saturn::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Uran::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}
-//
-//void Neptun::drawTexture()
-//{
-//	static cgvTexture texture(this->image_path);
-//	texture.apply();
-//}

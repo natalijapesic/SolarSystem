@@ -54,7 +54,7 @@ static const double earth_orbit_radius = 150000000;
 static const double earth_self_rotatin = 24;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double earth_orbit_rotation = 365.26; //days to rotate around the orbit
 static int selectedObj;
-static GLubyte earth[3] = { 0, 238, 255 };	//3
+static GLubyte earth[3] = { 0, 255, 0 };	//3
 static unsigned char* earth_image = NULL;
 static unsigned int _earth[2];
 #pragma endregion

@@ -295,11 +295,11 @@ void cgvInterface::init_callbacks() {
 
 void cgvInterface::assignSelection(GLubyte color[3])
 {
-	if (interface.current_cam == 2 && color[0] == earth[0] && color[1] == earth[1] && color[2] == earth[2])
+	if (color[0] == earth[0] && color[1] == earth[1] && color[2] == earth[2])
 	{
-		interface.current_cam = 0; //4
+		interface.current_cam = 1; //4
 	}
 	else {
-		interface.current_cam = 1;
+		interface.current_cam = 0;
 	}
 }

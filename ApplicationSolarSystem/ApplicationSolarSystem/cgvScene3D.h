@@ -41,7 +41,7 @@ class cgvScene3D {
 		Planet *Mercury, *Venus, *Earth, *Mars, *Jupiter, *Saturn, *Uran, *Neptun;
 	public:
 		Sun* instance_sun;
-		Comet* comets_rain[1000];
+		Comet* comets_rain[3];
 		// Default constructor and destructor
 		cgvScene3D();
 		~cgvScene3D();

@@ -5,7 +5,7 @@ Sun::Sun(cgvColor color)
 {
 	char image[]= "..\\..\\textures\\sun.bmp";
 	strcpy(this->image_path, image);
-	char image1[]= "..\\..\\textures\\najveca.bmp";
+	char image1[]= "..\\..\\textures\\space.bmp";
 	strcpy(this->image_space, image1);
 	this->angle = (360 / (30 * 24))*scaleHours;
 	this->color = color;
