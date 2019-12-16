@@ -38,8 +38,6 @@ public:
 
 	void draw();
 
-	void draw_space();
-
 	float get_angle() { return angle; }
 	void inc_angle() { angle += (360 / (30 * 24)) * scaleHours; }
 

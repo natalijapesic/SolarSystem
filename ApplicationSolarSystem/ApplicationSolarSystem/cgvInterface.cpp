@@ -78,7 +78,7 @@ void cgvInterface::configure_environment(int argc, char** argv,
 	//create_menu();
 
 	glEnable(GL_DEPTH_TEST); // enable the removal of hidden surfaces by using the z-buffer
-  glClearColor(1.0,1.0,1.0,0.0); // define the background color of the window
+  glClearColor(0.0,0.0,0.0,0.0); // define the background color of the window
 
 	glEnable(GL_LIGHTING); // enable the lighting of the scene
   glEnable(GL_NORMALIZE); // normalize the normal vectors required by the lighting computation. 

@@ -85,9 +85,7 @@ void cgvScene3D::render(renderMode mode) {
   
 	glPushMatrix();
 
-	int scena = 0;
-	if (scena == 0)
-	{
+
 		cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0, 0, 0, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
 		light.switchOn();
 		light.apply();
@@ -104,7 +102,6 @@ void cgvScene3D::render(renderMode mode) {
 		Uran->draw();
 		Neptun->draw();
 
-		instance_sun->draw_space();
 		instance_sun->draw();
 
 		comets_rain[0]->draw(-scaleSize(comet_orbit_radius+1000));
@@ -112,68 +109,10 @@ void cgvScene3D::render(renderMode mode) {
 		comets_rain[2]->draw(scaleSize(-mars_orbit_radius+45236));
 
 
-
-		cgvLight space_light(GL_LIGHT2, cgvPoint3D(0, 0, 0), cgvColor(100, 100, 100), cgvColor(100, 100, 100), cgvColor(100, 100, 100), 1, 0, 0);
-		space_light.switchOn();
-		space_light.apply();
-
-		double border = scaleSize(4 * neptun_radius) / scaleRadius;// 4 neptun radius = 2 neptuns
-		double shift = scaleSize(sun_radius) / scaleRadius - border;
-		double width_image = border/*add to the left of the image*/
-			+ 2 * scaleSize(neptun_radius) / scaleRadius/*do fit the last planet*/
-			+ scaleSize(neptun_orbit_radius) / scaleRadius/*distance between npt and sun*/
-			+ border/*right border where a part of the sun is visible*/;
-
-		double furthest_point = width_image + shift;
-
-		GLUquadric* sphere = gluNewQuadric();
-		gluQuadricDrawStyle(sphere, GLU_FILL);
-
-		cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
-			cgvColor(1, 1, 1),
-			cgvColor(1, 1, 1), 50);
-		material->apply();
-
-		char image[] = "..\\..\\textures\\2k_stars.bmp";
-		cgvTexture texture(instance_sun->get_space(), instance_sun->get_w(), instance_sun->get_h());
-		texture.apply();
-
-		gluQuadricTexture(sphere, TRUE);
-		gluQuadricNormals(sphere, GLU_SMOOTH);
-		gluSphere(sphere, sqrt(2) * furthest_point, 200, 200);
-
-
-		space_light.switchOff();
-		space_light.apply();
-
 		light.switchOff();
 		light.apply();
-		gluDeleteQuadric(sphere);
-	}
-	else {
-		if (axes) draw_axes();
 
 
-		//int i;
-		//int lineAmount = 100; //# of triangles used to draw circle
-
-		////GLfloat radius = 0.8f; //radius
-		//GLfloat twicePi = 2.0f * M_PI;
-		//GLfloat color[] = { 0,1,0,1.0 };
-		//glMaterialfv(GL_FRONT, GL_EMISSION, color);
-
-		//glBegin(GL_LINE_LOOP);
-		//for (i = 0; i <= lineAmount;i++) {
-		//	glVertex3f(
-		//		(2 * cos(i * twicePi / lineAmount)),
-		//		(2 * sin(i * twicePi / lineAmount)),
-		//		0
-		//	);
-		//}
-		//glEnd();
-
-
-	}
 	glPopMatrix();
 }
 
