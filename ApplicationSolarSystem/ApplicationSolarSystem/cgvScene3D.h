@@ -58,6 +58,7 @@ class cgvScene3D {
 		void marija();
 		bool get_axes() {return axes;};
 		void set_axes(bool _axes){axes = _axes;};
+		void draw_axes(void);
 
 		void rotateEarth();
 };

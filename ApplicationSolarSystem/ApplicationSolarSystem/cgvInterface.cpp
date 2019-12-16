@@ -304,6 +304,6 @@ void cgvInterface::assignSelection(GLubyte color[3])
 		interface.current_cam = 0; //4
 	}
 	else {
-		interface.current_cam = 2;
+		interface.current_cam = 1;
 	}
 }

@@ -39,7 +39,7 @@ struct Moon {
 
 
 class Planet {
-private:
+protected:
 	
 
 	unsigned int textureID;
@@ -66,6 +66,8 @@ public:
 	void draw();
 	void drawMoon(int count);
 	void drawRing();
+	void drawOrbit();
+	//virtual void drawTexture() = 0;
 
 	void move();
 	void addMoon(double radius, double distance, double speed);
@@ -74,7 +76,37 @@ public:
 
 };
 
-
-
-
+//
+//class Mercury :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Venus :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Earth :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Mars :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Jupiter :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Saturn :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Uran :Planet {
+//public:
+//	void drawTexture();
+//};
+//class Neptun :Planet {
+//public:
+//	void drawTexture();
+//};
 #endif

@@ -20,7 +20,7 @@ void Sun::draw()
 	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(240, 240, 240, 1), cgvColor(0, 0, 0, 1), cgvColor(0, 0, 0, 1), 1, 0, 0);
 	light.switchOn();
 	light.apply();
-	cgvTexture texture(this->image_path);
+	static cgvTexture texture(this->image_path);
 
 	glRotated(angle, 0, 1, 0);
 	sphere = gluNewQuadric();

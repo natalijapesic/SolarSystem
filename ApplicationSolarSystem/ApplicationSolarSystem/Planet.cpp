@@ -35,13 +35,20 @@ void Planet::draw()
 	//move the planet according to its orbit
 	float x = orbit_radius * sin( M_PI* 2 * this->orbit_angle / 360) /scaleRadius;
 	float y = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
+
+
 	glTranslatef(x, 0, y);
 
 	glRotatef(90-23.5, 1, 0, 0);
 
 	glPushMatrix();
 	glRotatef(this->rotate_angle, 0, 0, 1);
+	//static cgvTexture texture(this->image_path);
+	////cgvTexture texture(this->image_path);
+	//texture.apply();
 	cgvTexture texture(this->image_path);
+	texture.apply();
+
 	sphere = gluNewQuadric();
 
 	if (glIsEnabled(GL_LIGHTING) && glIsEnabled(GL_TEXTURE_2D))
@@ -53,8 +60,8 @@ void Planet::draw()
 			cgvColor(1, 1, 1),
 			cgvColor(1, 1, 1), 50);
 		material->apply();
-
-		texture.apply();
+		int j = 0;
+		
 		gluQuadricTexture(sphere, TRUE);
 	}
 	else {
@@ -84,9 +91,9 @@ void Planet::drawMoon(int count)
 	glRotated(moons[count].current_angle/* - this->rotate_angle*/, 0, 0, 1);
 	glTranslated(0, moons[count].distance + scaleSize(radius) / scaleRadius, 0);
 
-	cgvMaterial* material = new cgvMaterial(cgvColor(100, 100, 1),
-		cgvColor(100, 100, 1),
-		cgvColor(100, 100, 1), 50);
+	cgvMaterial* material = new cgvMaterial(cgvColor(50, 50, 50),
+		cgvColor(10, 10, 10),
+		cgvColor(20, 20, 20), 50);
 	material->apply();
 
 	glutSolidSphere(moons[count].radius, 50, 50);
@@ -105,7 +112,7 @@ void Planet::drawRing()
 
 	GLUquadric* ring = gluNewQuadric();
 
-	cgvLight light(GL_LIGHT3, cgvPoint3D(0, 0, 0), cgvColor(5, 5, 5, 1), cgvColor(5, 5, 5, 1), cgvColor(5, 5, 5, 1), 1, 0, 0);
+	cgvLight light(GL_LIGHT3, cgvPoint3D(0, 0, 0), cgvColor(1, 1, 1, 0.5), cgvColor(1, 1, 1, 0.5), cgvColor(1, 1, 1, 0.5), 1, 0, 0);
 	light.switchOn();
 	light.apply();
 
@@ -116,22 +123,44 @@ void Planet::drawRing()
 	//light
 	
 
-	cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
-		cgvColor(1, 1, 1),
-		cgvColor(1, 1, 1), 50);
+	cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1, 0.5),
+		cgvColor(1, 1, 1, 0.5),
+		cgvColor(1, 1, 1, 0.5), 5);
 	material->apply();
 
-	char image[] = "..\\..\\textures\\2k_saturn.bmp";
-	cgvTexture texture(image);
+	char image[] = "..\\..\\textures\\saturnmap.bmp";
+	static cgvTexture texture(image);
 	texture.apply();
 
 	gluQuadricTexture(ring, TRUE);
 	gluQuadricNormals(ring, GLU_SMOOTH);
-	gluDisk(ring, 7, 8, 100, 100);
+	gluDisk(ring, this->ring_inner, this->ring_outer, 100, 100);
 
 	light.switchOff();
 	light.apply();
 	glPopMatrix();
+}
+
+void Planet::drawOrbit()
+{
+	//glPushMatrix();
+	int i;
+	int lineAmount = 100; //# of triangles used to draw circle
+
+	//GLfloat radius = 0.8f; //radius
+	GLfloat twicePi = 2.0f * M_PI;
+	GLfloat color[] = { 1,0,0,1.0 };
+	//glMaterialfv(GL_FRONT, GL_EMISSION, color);
+
+	glBegin(GL_LINE_LOOP);
+	for (i = 0; i <= lineAmount;i++) {
+		glVertex3f(
+			(orbit_radius / scaleRadius * cos(i * twicePi / lineAmount)),
+			0,
+			(orbit_radius / scaleRadius * sin(i * twicePi / lineAmount))
+		);
+	}
+	glEnd();
 }
 
 
@@ -172,3 +201,51 @@ void Planet::set_color(GLubyte _color[3])
 	this->select[1] = _color[1];
 	this->select[2] = _color[2];
 }
+
+//void Mercury::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Venus::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Earth::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Mars::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Jupiter::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Saturn::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Uran::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}
+//
+//void Neptun::drawTexture()
+//{
+//	static cgvTexture texture(this->image_path);
+//	texture.apply();
+//}

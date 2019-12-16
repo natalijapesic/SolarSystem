@@ -16,7 +16,7 @@ class cgvScene3D;
 	//radius of sun is 695,500km...km == cm ==> valueHere=659,500/1000 
 
 static const double scaleRadius = 10000.0f;
-static double scaleHours = 1;
+static double scaleHours = 100;
 static const bool scale = true;
 
 

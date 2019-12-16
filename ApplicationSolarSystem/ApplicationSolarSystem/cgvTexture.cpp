@@ -3,8 +3,8 @@
 // Constructor and destructor methods
 
 cgvTexture::cgvTexture(char *file) {
-	unsigned char *image; 
-
+	unsigned char* image;
+	unsigned int width, height;
 	// load the BMP image in memory
 	image = loadBMPRaw(file, width, height, true);
 

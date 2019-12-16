@@ -14,6 +14,8 @@
 cgvScene3D::cgvScene3D () {
 	axes = true;
 
+	//Planet* p = new Mercury();
+	
 	GLubyte val_color[3] = { 1, 0, 0 };
 	Mercury = new Planet(scaleSize(mercury_radius), "..\\..\\textures\\2k_mercury.bmp", scaleSize(mercury_orbit_radius), mercury_orbit_rotation, mercury_self_rotatin, val_color);
 	Venus = new Planet(scaleSize(venus_radius), "..\\..\\textures\\2k_venus_surface.bmp", scaleSize(venus_orbit_radius), venus_orbit_rotation, venus_self_rotatin, val_color);
@@ -26,7 +28,7 @@ cgvScene3D::cgvScene3D () {
 	Jupiter->addMoon(1821, 42200, 8.6);
 	Jupiter->addMoon(2410, 127000, 0.9);
 	Saturn = new Planet(scaleSize(saturn_radius), "..\\..\\textures\\2k_saturn.bmp", scaleSize(saturn_orbit_radius), saturn_orbit_rotation, saturn_self_rotatin, val_color);
-	Saturn->addRing(scaleSize(74500) / scaleRadius, scaleSize(117588) / scaleRadius);
+	Saturn->addRing(scaleSize(90000) / scaleRadius, scaleSize(117588) / scaleRadius);
 	Uran = new Planet(scaleSize(uran_radius), "..\\..\\textures\\2k_uranus.bmp", scaleSize(uran_orbit_radius), uran_orbit_rotation, uran_self_rotatin, val_color);
 	Neptun = new Planet(scaleSize(neptun_radius), "..\\..\\textures\\2k_neptune.bmp", scaleSize(neptun_orbit_radius), neptun_orbit_rotation, neptun_self_rotatin, val_color);
 	
@@ -47,7 +49,7 @@ cgvScene3D::set(int scene) {
 }
 
 
-void draw_axes(void) {
+void cgvScene3D::draw_axes(void) {
   GLfloat red[]={1,0,0,1.0};
   GLfloat green[]={0,1,0,1.0};
   GLfloat blue[]={0,0,1,1.0};
@@ -65,6 +67,16 @@ void draw_axes(void) {
 		glVertex3f(0,0,1000);
 		glVertex3f(0,0,-1000);
 	glEnd();
+
+	Earth->drawOrbit();
+	Mercury->drawOrbit();
+	Venus->drawOrbit();
+	Mars->drawOrbit();
+	Jupiter->drawOrbit();
+	Saturn->drawOrbit();
+	Uran->drawOrbit();
+	Neptun->drawOrbit();
+
 }
 
 
@@ -147,39 +159,26 @@ void cgvScene3D::marija()
 	else {
 		if (axes) draw_axes();
 
-		GLUquadric* sphere;
+
+		//int i;
+		//int lineAmount = 100; //# of triangles used to draw circle
+
+		////GLfloat radius = 0.8f; //radius
+		//GLfloat twicePi = 2.0f * M_PI;
+		//GLfloat color[] = { 0,1,0,1.0 };
+		//glMaterialfv(GL_FRONT, GL_EMISSION, color);
+
+		//glBegin(GL_LINE_LOOP);
+		//for (i = 0; i <= lineAmount;i++) {
+		//	glVertex3f(
+		//		(2 * cos(i * twicePi / lineAmount)),
+		//		(2 * sin(i * twicePi / lineAmount)),
+		//		0
+		//	);
+		//}
+		//glEnd();
+
 		
-
-		sphere = gluNewQuadric();
-		cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
-		light.switchOn();
-		light.apply();
-
-		glColor3f(0.0, 1.0, 0.0);
-
-		gluQuadricDrawStyle(sphere, GLU_FILL);
-
-		cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
-			cgvColor(1, 1, 1),
-			cgvColor(1, 1, 1), 50);
-		material->apply();
-		
-		char image[] = "..\\..\\textures\\2k_stars.bmp";
-		cgvTexture texture(image);
-		texture.apply();
-
-		gluQuadricTexture(sphere, TRUE);
-		gluQuadricNormals(sphere, GLU_SMOOTH);
-		gluDisk(sphere, 1, 1.5, 200, 200);
-		//gluSphere(sphere, 3, 20, 20);
-
-		/*cgvColor color(100, 1, 1, 1);
-		color.apply();
-		glutSolidSphere(1, 20, 20);*/
-
-		light.switchOff();
-		light.apply();
-		gluDeleteQuadric(sphere);
 	}
 	glPopMatrix (); 
 }
