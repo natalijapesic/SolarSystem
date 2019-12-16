@@ -29,6 +29,7 @@ static const double mercury_radius = 2439.7;//the size of the planet
 static const double mercury_orbit_radius = 58000000; //distance from the orbit
 static const double mercury_self_rotatin = 1408;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double mercury_orbit_rotation = 87.97; //days to rotate around the orbit
+static unsigned char* mercury_image;
 //88*24 = hours to rotate around the orbit
 //360 / (88*24) = degreese in 1hour
 #pragma endregion
@@ -48,7 +49,7 @@ static const double earth_self_rotatin = 24;//hours to rotate 360 around itself,
 static const double earth_orbit_rotation = 365.26; //days to rotate around the orbit
 static int selectedObj;
 static GLubyte earth[3] = { 0, 238, 255 };	//3
-
+static unsigned char* earth_image;
 #pragma endregion
 
 #pragma region Mars
@@ -56,7 +57,7 @@ static const double mars_radius = 3396.2;//
 static const double mars_orbit_radius = 228000000 ;
 static const double mars_self_rotatin = 25;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double mars_orbit_rotation = 686.98; //days to rotate around the orbit
-
+static unsigned char* mars_image;
 #pragma endregion
 
 #pragma region Jupiter
@@ -64,7 +65,7 @@ static const double jupiter_radius = 71492;//
 static const double jupiter_orbit_radius = 778000000;
 static const double jupiter_self_rotatin = 10;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double jupiter_orbit_rotation = 4332.82; //days to rotate around the orbit
-
+static unsigned char* jupiter_image;
 #pragma endregion
 
 #pragma region Saturn
@@ -72,7 +73,7 @@ static const double saturn_radius = 60268;//
 static const double saturn_orbit_radius = 1427000000;
 static const double saturn_self_rotatin = 11;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double saturn_orbit_rotation = 10755.7; //days to rotate around the orbit
-
+static unsigned char* saturn_image;
 #pragma endregion
 
 #pragma region Uran
@@ -80,7 +81,7 @@ static const double uran_radius = 25559;//
 static const double uran_orbit_radius = 2871000000;
 static const double uran_self_rotatin = 17;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double uran_orbit_rotation = 30687.15; //days to rotate around the orbit
-
+static unsigned char* uran_image;
 #pragma endregion
 
 #pragma region Neptun
@@ -88,7 +89,7 @@ static const double neptun_radius =24764 ;//
 static const double neptun_orbit_radius = 4497000000;
 static const double neptun_self_rotatin = 16;//hours to rotate 360 around itself, 360/self_rotatin is how many degrees it rotates around itself for 1h
 static const double neptun_orbit_rotation = 60190.03; //days to rotate around the orbit
-
+static unsigned char* neptun_image;
 #pragma endregion
 
 #pragma region Comet
@@ -102,6 +103,7 @@ static bool rotate_comet = true;
 #pragma region Space
 static double space_radius() {
 	return 5000;
+static unsigned char* space_image;
 }
 #pragma endregion
 
