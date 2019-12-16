@@ -31,6 +31,11 @@ class cgvInterface {
 		cgvScene3D scene; // scene to be rendered in the display window defined by cgvInterface. 
 		cgvCamera camera[4]; // Camera to visualize the scene
 		int current_cam;
+
+		renderMode mode; // CGV_VISUALIZE: in the window where the scene is usually rendered  
+							// CGV_SELECT: the user has clicked, the scene must be rendered in selection mode to compute the list of 							  // impacts
+		int cursorX, cursorY; // pixel of the screen where the mouse is placed while clicking or dragging 
+		bool pressed_button; // button pressed (true) or released(false)
 	public:
 		// Default constructor and destructor
 		cgvInterface();
@@ -44,6 +49,12 @@ class cgvInterface {
 		static void set_glutDisplayFunc(); // method to render the scene
 
 		static void menuHandle(int value); // method to handle the menu
+
+		static void  set_glutMouseFunc(GLint button, GLint state, GLint x, GLint y); // control mouse clicking
+		static void  set_glutMotionFunc(GLint x, GLint y); // control the mouse movement while a button is pressed
+
+		void init_selection();
+		void finish_selection();
 
 		// Methods
 		// create the world that is render in the window
@@ -66,6 +77,13 @@ class cgvInterface {
 
 		void set_width_window(int _width_window){width_window = _width_window;};
 		void set_height_window(int _height_window){height_window = _height_window;};
+
+
+		void set_currentCam(int a) { current_cam = a; }
+
+		int get_currentCam() { return current_cam; }
+
+		void assignSelection(GLubyte color[3]);
 };
 
 #endif

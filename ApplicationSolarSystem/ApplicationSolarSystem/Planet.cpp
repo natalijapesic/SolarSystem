@@ -2,14 +2,15 @@
 
 
 
-Planet::Planet(double _radius, const char image[200], double _orbit_radius, double _speed, double _rotational_speed, cgvColor _select)
+Planet::Planet(double _radius, const char image[200], double _orbit_radius, double _speed, double _rotational_speed, GLubyte _select[3])
 {
 	//set parameters
 	this->radius = _radius;
 	this->orbit_radius = _orbit_radius + scaleSize(sun_radius); //distance from the sun + sun radius = distance from the center of the sun
 	this->orbital_speed = _speed;
 	this->rotation_speed = _rotational_speed;
-	this->select = _select;
+	for (int i = 0; i < 3; i++)
+		this->select[i] = _select[i];
 	strcpy(this->image_path, image);
 //	this->image_path = image;
 	this->textureID = -1;
@@ -24,9 +25,11 @@ Planet::Planet(double _radius, const char image[200], double _orbit_radius, doub
 
 void Planet::draw()
 {
+	
 	//draw it in the center of the wcs
 	glPushMatrix();
 
+	GLUquadric* sphere;
 	//move the planet according to its orbit
 	float x = orbit_radius * sin( M_PI* 2 * this->orbit_angle / 360) /scaleRadius;
 	float y = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
@@ -37,34 +40,34 @@ void Planet::draw()
 
 	glPushMatrix();
 	glRotatef(this->rotate_angle, 0, 0, 1);
-	
-	GLUquadric* sphere;
-
 	cgvTexture texture(this->image_path);
-
 	sphere = gluNewQuadric();
 
-	glColor3f(0.0, 1.0, 0.0);
-	gluQuadricDrawStyle(sphere, GLU_FILL);
+	if (glIsEnabled(GL_LIGHTING) && glIsEnabled(GL_TEXTURE_2D))
+	{
+		glColor3f(0.0, 1.0, 0.0);
+		gluQuadricDrawStyle(sphere, GLU_FILL);
 
-	cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
-		cgvColor(1, 1, 1),
-		cgvColor(1, 1, 1), 50);
-	material->apply();
+		cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
+			cgvColor(1, 1, 1),
+			cgvColor(1, 1, 1), 50);
+		material->apply();
 
-	texture.apply();
-	gluQuadricTexture(sphere, TRUE);
-	gluQuadricNormals(sphere, GLU_SMOOTH);
-	gluSphere(sphere, radius/scaleRadius, 200, 200);
+		texture.apply();
+		gluQuadricTexture(sphere, TRUE);
+	}
+	else {
+		glColor3ub(select[0], select[1], select[2]);
+		gluQuadricDrawStyle(sphere, GLU_FILL);
+	}
 
-	glPopMatrix();
-	//printf("%f\n", radius / scaleRadius);
+	gluSphere(sphere, radius / scaleRadius, 32, 16);
+	
 
 	for (int i = 0;i < moon_count;i++)
 	{
 		drawMoon(i);
 	}
-
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);
@@ -104,14 +107,9 @@ void Planet::move()
 		moons[i].current_angle += moons[i].speed * scaleHours;
 }
 
-void Planet::addMoon(double radius, double distance, double speed)
+void Planet::set_color(GLubyte _color[3])
 {
-	if (moon_count > 3) return;
-
-	this->moons[moon_count].radius = radius;
-	this->moons[moon_count].distance = distance;
-	this->moons[moon_count].speed = speed;
-	this->moons[moon_count].current_angle = 0;
-	moon_count++;
+	this->select[0] = _color[0];
+	this->select[1] = _color[1];
+	this->select[2] = _color[2];
 }
-

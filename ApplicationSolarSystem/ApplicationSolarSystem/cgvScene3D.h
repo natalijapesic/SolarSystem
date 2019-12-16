@@ -21,10 +21,12 @@
 #include "Planet.h"
 #include "Comet.h";
 
-
 #define nbScenes 5
 
-
+typedef enum {
+	CGV_VISUALIZE,
+	CGV_SELECT
+} renderMode;
 
 class cgvScene3D {
 	public:/*
@@ -34,11 +36,9 @@ class cgvScene3D {
 	protected:
 		// Attributes
 
-		bool axes;/*
-		int selectedScene;*/
+		bool axes;
+		int selectedScene;
 		Planet *Mercury, *Venus, *Earth, *Mars, *Jupiter, *Saturn, *Uran, *Neptun;
-		
-
 	public:
 		Sun* instance_sun;
 		Comet* comets_rain[1000];
@@ -52,9 +52,10 @@ class cgvScene3D {
 
 		// Methods
 		// method with the OpenGL calls to render the scene
-    void render();
-	void natalija();
-	void marija();
+		void render(renderMode mode);
+
+		void natalija();
+		void marija();
 		bool get_axes() {return axes;};
 		void set_axes(bool _axes){axes = _axes;};
 

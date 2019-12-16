@@ -47,7 +47,7 @@ private:
 	//rings data struct
 	//moons data struct
 
-	cgvColor select;
+	GLubyte select[3];
 
 	double radius;//the radius of a planet
 	double rotation_speed; //hours to rotate around itself
@@ -62,12 +62,14 @@ private:
 	double ring_inner, ring_outer;
 
 public:
-	Planet(double _radius,const char image[200], double _orbit_radius, double _orbital_speed, double _rotational_speed, cgvColor _select);
+	Planet(double _radius,const char image[200], double _orbit_radius, double _orbital_speed, double _rotational_speed, GLubyte _select[3]);
 	void draw();
 	void drawMoon(int count);
 
 	void move();
 	void addMoon(double radius, double distance, double speed);
+	void set_color(GLubyte color[3]);
+
 };
 
 

@@ -16,10 +16,24 @@ static int x = 0;
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
 	// create the camera
-	interface.current_cam = 0;
 
-	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(500,0,0),cgvPoint3D(0,0,50),cgvPoint3D(0,1, 0),
-		                                -1*500, 1*500, -1*250, 1*250, -1*0, 6000);
+	mode = CGV_VISUALIZE;
+	pressed_button = false;
+
+	interface.current_cam = 2;
+
+	// create the camera
+	double size_of_the_visible_part;// from camera:
+	size_of_the_visible_part = scaleSize(sun_radius) / 2 / scaleRadius;//distance from the coordinate beggining to the furthest planet - center to center
+	double znear = scaleSize(neptun_orbit_radius + sun_radius + neptun_radius) * 1.01 / 2 / scaleRadius;
+	double shift = scaleSize(sun_radius) * 0.8 / scaleRadius;//
+	//double parameter = size_of_the_visible_part / 2/* + shift*/;
+
+	interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(znear, 0, size_of_the_visible_part + shift), cgvPoint3D(0, 0, size_of_the_visible_part + shift), cgvPoint3D(0, 1.0, 0),
+		-1 * size_of_the_visible_part, 1 * size_of_the_visible_part, -1 * size_of_the_visible_part / 2, 1 * size_of_the_visible_part / 2, -1 * 0, znear * 2);
+
+	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(30,0,-50),cgvPoint3D(0,0,0),cgvPoint3D(0,1, 0),
+		                                -1*100, 1*100, -1*50, 1*50, -1*0, 600);
 	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 0), cgvPoint3D(0, 0, 250), cgvPoint3D(0, 1.0, 0),
 		-1 * 2500, 1 * 2500, -1 * 1250, 1 * 1250, -1 * 0, 5000000 * 2);
 
@@ -160,14 +174,26 @@ void cgvInterface::set_glutDisplayFunc() {
 	// set up the viewport
 	glViewport(0, 0, interface.get_width_window(), interface.get_height_window());
 	// Apply the camera and projection parameters
+
+	if (interface.mode == CGV_SELECT) {
+		// Section D: if it is in the OpenGL selection mode disable the lighting to use the color buffer technique
+		interface.init_selection();
+	}
 	interface.camera[interface.current_cam].apply();
 
 	// Render the scene
-	interface.scene.render();
+	interface.scene.render(interface.mode);
 
-	// refresh the window
-	glutSwapBuffers(); // it is used instead of glFlush(), to avoid flickering
-	
+	if (interface.mode == CGV_SELECT) {
+		// Section D: exit the selection mode and process the information in the color buffer
+		interface.mode = CGV_VISUALIZE;
+		interface.finish_selection();
+		glutPostRedisplay();
+	}
+	else {
+		// refresh the window
+		glutSwapBuffers(); // it is used instead of glFlush(), to avoid flickering
+	}
 }
 
 void cgvInterface::menuHandle(int value)
@@ -176,8 +202,82 @@ void cgvInterface::menuHandle(int value)
 	glutPostRedisplay(); // renew the content of the window
 }
 
+void cgvInterface::set_glutMouseFunc(GLint button, GLint state, GLint x, GLint y)
+{
+	if (button == GLUT_LEFT_BUTTON) {
+		// Section D: Store the button that has been pressed or released. If it has been clicked, then change to selection mode (CGV_SELECT)
+		if (interface.pressed_button == false && state == GLUT_DOWN) {
+			interface.pressed_button = true;
+			interface.mode = CGV_SELECT;
+		}
+		else if (interface.pressed_button == true && state == GLUT_UP) {
+			interface.pressed_button = false;
+			interface.mode = CGV_VISUALIZE;
+		}
+
+		// Section D: Save the position of the pixel when the mouse was clicked
+
+		interface.cursorX = x;
+		interface.cursorY = y;
+
+		// Section D: Redraw the content of the display window 
+		glutPostRedisplay();
+
+	}
+}
+
+void cgvInterface::set_glutMotionFunc(GLint x, GLint y)
+{
+	if (!interface.pressed_button)
+		return;
+
+	// Section F: Save the new position of the mouse
+	interface.cursorX = x;
+	interface.cursorY = y;
+	// Section F: Redraw the content of the display window 
+	glutPostRedisplay();
+}
+
+void cgvInterface::init_selection()
+{
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+}
+
+void cgvInterface::finish_selection()
+{
+	glReadBuffer(GL_BACK);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glPixelStorei(GL_PACK_ALIGNMENT, 1);
+
+	GLubyte pixels[3] = { 0, 0, 0 };
+
+	// TODO: Section D: Use the function glReadPixels to get the color at a given position of the window. 
+	glReadPixels(cursorX, height_window - cursorY - 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+	// Section D: Call the assignSelection method of the scene class to compute the selected part of the model, if any. 
+	assignSelection(pixels);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+}
+
 void cgvInterface::init_callbacks() {
 	glutKeyboardFunc(set_glutKeyboardFunc);
 	glutReshapeFunc(set_glutReshapeFunc);
 	glutDisplayFunc(set_glutDisplayFunc);
+
+	glutMouseFunc(set_glutMouseFunc);
+	glutMotionFunc(set_glutMotionFunc);
+}
+
+void cgvInterface::assignSelection(GLubyte color[3])
+{
+	if (interface.current_cam == 2 && color[0] == earth[0] && color[1] == earth[1] && color[2] == earth[2])
+	{
+		interface.current_cam = 0; //4
+	}
+	else {
+		interface.current_cam = 2;
+	}
 }
