@@ -35,6 +35,7 @@ cgvTexture::cgvTexture(char *file) {
 
 void cgvTexture::apply(void) {
   glBindTexture(GL_TEXTURE_2D, idTexture);
+  
 }
 
 cgvTexture::~cgvTexture() {

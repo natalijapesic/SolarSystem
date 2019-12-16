@@ -74,30 +74,64 @@ void cgvScene3D::marija()
 {
 	glPushMatrix();
 
-	/*int scena = 0;*/
+	int scena = 1;
+	if (scena == 0)
+	{
+		cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
+		light.switchOn();
+		light.apply();
 
-	cgvLight light(GL_LIGHT0, cgvPoint3D(0, 0, 0), cgvColor(0.5, 0.5, 0.5, 1), cgvColor(5, 5, 5, 1), cgvColor(6, 6, 6, 1), 1, 0, 0);
-	light.switchOn();
-	light.apply();
 
+		if (axes) draw_axes();
 
-	if (axes) draw_axes();
+		Mercury->draw();
+		Venus->draw();
+		Earth->draw();
+		Mars->draw();
+		Jupiter->draw();
+		Saturn->draw();
+		Uran->draw();
+		Neptun->draw();
 
-	Mercury->draw();
-	Venus->draw();
-	Earth->draw();
-	Mars->draw();
-	Jupiter->draw();
-	Saturn->draw();
-	Uran->draw();
-	Neptun->draw();
+		instance_sun->draw_space();
+		instance_sun->draw();
+		comet_angle *= -1;
+		for (int i = 0; i < 500; i++)
+			comets_rain[i]->draw(comet_angle * rand() % 700, rand() % 700, comet_angle * rand() % 1500);
+	}
+	else {
+		if (axes) draw_axes();
 
-	instance_sun->draw_space();
-	instance_sun->draw();
-	comet_angle *= -1;
-	for (int i = 0; i < 500; i++)
-		comets_rain[i]->draw(comet_angle*rand()%700, rand()%700, comet_angle * rand()%1500);
+		GLUquadric* sphere;
+		
 
+		sphere = gluNewQuadric();
+		cgvLight light(GL_LIGHT5, cgvPoint3D(0, 0, 0), cgvColor(10, 1, 1, 1), cgvColor(100, 1, 1, 1), cgvColor(100, 1, 1, 1), 1, 0, 0);
+		light.switchOn();
+		light.apply();
+		glColor3f(0.0, 1.0, 0.0);
+		gluQuadricDrawStyle(sphere, GLU_FILL);
+
+		cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
+			cgvColor(1, 1, 1),
+			cgvColor(1, 1, 1), 50);
+		material->apply();
+		
+		char image[] = "..\\..\\textures\\2k_stars.bmp";
+		cgvTexture texture(image);
+		texture.apply();
+
+		gluQuadricTexture(sphere, TRUE);
+		gluQuadricNormals(sphere, GLU_SMOOTH);
+		gluSphere(sphere, 3, 20, 20);
+
+		/*cgvColor color(100, 1, 1, 1);
+		color.apply();
+		glutSolidSphere(1, 20, 20);*/
+
+		light.switchOff();
+		light.apply();
+	}
 	glPopMatrix (); 
 }
 void cgvScene3D::natalija()

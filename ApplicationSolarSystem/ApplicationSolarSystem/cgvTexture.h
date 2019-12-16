@@ -25,7 +25,7 @@ class cgvTexture {
 		unsigned int idTexture; // texture identifier
 		unsigned int height,      // height of the texture
 			          width;     // weight of the texture
-
+		unsigned char* image;
 		
 	public:
 		// Default Constructors and destructor

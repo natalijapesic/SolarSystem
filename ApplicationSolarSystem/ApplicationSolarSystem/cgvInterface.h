@@ -29,7 +29,7 @@ class cgvInterface {
 		int height_window;  // initial height of the display window
 
 		cgvScene3D scene; // scene to be rendered in the display window defined by cgvInterface. 
-		cgvCamera camera[4]; // Camera to visualize the scene
+		cgvCamera camera[6]; // Camera to visualize the scene
 		int current_cam;
 
 		renderMode mode; // CGV_VISUALIZE: in the window where the scene is usually rendered  

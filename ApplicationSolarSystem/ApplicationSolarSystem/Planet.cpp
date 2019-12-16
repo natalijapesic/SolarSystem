@@ -21,6 +21,8 @@ Planet::Planet(double _radius, const char image[200], double _orbit_radius, doub
 
 	ring_inner = -1;
 	ring_outer = -1;
+
+	texture = new cgvTexture(this->image_path);
 }
 
 void Planet::draw()
@@ -34,7 +36,6 @@ void Planet::draw()
 	float x = orbit_radius * sin( M_PI* 2 * this->orbit_angle / 360) /scaleRadius;
 	float y = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
 	glTranslatef(x, 0, y);
-	printf("%f, %f\n", x, y);
 
 	glRotatef(90-23.5, 1, 0, 0);
 
@@ -63,6 +64,7 @@ void Planet::draw()
 
 	gluSphere(sphere, radius / scaleRadius, 32, 16);
 	
+	glPopMatrix();
 
 	for (int i = 0;i < moon_count;i++)
 	{
@@ -99,7 +101,6 @@ void Planet::move()
 
 
 	this->rotate_angle +=360 * (double)scaleHours/rotation_speed;//rs - hours for the 
-	printf("%f\n", scaleHours);
 
 	this->orbit_angle+=360 * (double)scaleHours /(orbital_speed*24);//
 	

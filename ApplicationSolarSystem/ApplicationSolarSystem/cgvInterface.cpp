@@ -15,6 +15,47 @@ static int x = 0;
 
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
+	// create the camera
+	interface.current_cam = 2;
+
+	double border = scaleSize(4 * neptun_radius) / scaleRadius;// 4 neptun radius = 2 neptuns
+	double shift = scaleSize(sun_radius) / scaleRadius - border;
+	double width_image = border/*add to the left of the image*/
+		+ 2 * scaleSize(neptun_radius) / scaleRadius/*do fit the last planet*/
+		+ scaleSize(neptun_orbit_radius) / scaleRadius/*distance between npt and sun*/
+		+ border/*right border where a part of the sun is visible*/;
+
+	double furthest_point = width_image + shift;
+
+	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
+		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+
+	interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(0, furthest_point, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(-1.0, 0, 0),
+		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+
+	
+	border = scaleSize(2 * earth_radius) / scaleRadius;// 4 neptun radius = 2 neptuns
+	shift = scaleSize(sun_radius) / scaleRadius - border;
+	width_image = border/*add to the left of the image*/
+		+ 2 * scaleSize(earth_radius) / scaleRadius/*do fit the earth*/
+		+ 1.5 * scaleSize(earth_orbit_radius) / scaleRadius/*left and right from the eart*/
+		+ border/*right border where a part of the sun is visible*/;
+
+	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
+		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+
+
+	//border = scaleSize(1 * earth_radius) / scaleRadius;// 4 neptun radius = 2 neptuns
+	//shift = scaleSize(sun_radius) / scaleRadius - border;
+	//width_image = border/*add to the left of the image*/
+	//	+ 2 * scaleSize(earth_radius) / scaleRadius/*do fit the earth*/
+	//	+ 2 * scaleSize(earth_orbit_radius) / scaleRadius/*left and right from the eart*/
+	//	+ border/*right border where a part of the sun is visible*/;
+
+	//interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
+	//	-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+
+	interface.camera[3].set(CGV_PARALLEL, cgvPoint3D(0, 0, 4), cgvPoint3D(0, 0, 0), cgvPoint3D(0, 1, 0), -2, 2, -1 * 0.7, 1 * 0.7, 1.5, 100);
 
 }
 
@@ -63,11 +104,10 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 		 break;
 	 case 'S': // Section F: decrease by 0.1 the R component of the specular coefficient of the material. 
 		 scaleHours -= 10;
-		 printf("%f\n", scaleHours);
+		
 		 break;
 	 case 'F':
 		 scaleHours += 10;
-		 printf("%f\n", scaleHours);
 		 break;
 	 case 'p': // Section F: increase by 10 the phong exponent of the material. 
 		 break;
@@ -90,7 +130,15 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 	 case 'r':
 		 interface.scene.rotateEarth();
 		 break;
-
+	 case '1':
+		 interface.current_cam = 0;
+		 break;
+	 case '2':
+		 interface.current_cam = 1;
+		 break;
+	 case '3':
+		 interface.current_cam = 2;
+		 break;
     case 'a': // enable/disable the visualization of the axes
 			interface.scene.set_axes(interface.scene.get_axes()?false:true);
 
