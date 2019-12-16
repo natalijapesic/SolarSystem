@@ -22,7 +22,7 @@ Planet::Planet(double _radius, const char image[200], double _orbit_radius, doub
 	ring_inner = -1;
 	ring_outer = -1;
 
-	texture = new cgvTexture(this->image_path);
+	//texture = new cgvTexture(this->image_path);
 }
 
 void Planet::draw()
@@ -70,8 +70,9 @@ void Planet::draw()
 	{
 		drawMoon(i);
 	}
-	glPopMatrix();
+	drawRing();
 
+	glPopMatrix();
 	gluDeleteQuadric(sphere);
 }
 
@@ -83,12 +84,53 @@ void Planet::drawMoon(int count)
 	glRotated(moons[count].current_angle/* - this->rotate_angle*/, 0, 0, 1);
 	glTranslated(0, moons[count].distance + scaleSize(radius) / scaleRadius, 0);
 
+	cgvMaterial* material = new cgvMaterial(cgvColor(100, 100, 1),
+		cgvColor(100, 100, 1),
+		cgvColor(100, 100, 1), 50);
+	material->apply();
+
+	glutSolidSphere(moons[count].radius, 50, 50);
+	glPopMatrix();
+}
+
+void Planet::drawRing()
+{
+	if (this->ring_inner <= 0) return;
+
+
+
+	glPushMatrix();
+
+	glRotatef(10, 0, 1, 0);
+
+	GLUquadric* ring = gluNewQuadric();
+
+	cgvLight light(GL_LIGHT3, cgvPoint3D(0, 0, 0), cgvColor(5, 5, 5, 1), cgvColor(5, 5, 5, 1), cgvColor(5, 5, 5, 1), 1, 0, 0);
+	light.switchOn();
+	light.apply();
+
+	glColor3f(0.0, 1.0, 0.0);
+	//cgvColor(100, 100, 100, 1).apply();
+
+	gluQuadricDrawStyle(ring, GLU_FILL);
+	//light
+	
+
 	cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1),
 		cgvColor(1, 1, 1),
 		cgvColor(1, 1, 1), 50);
 	material->apply();
 
-	glutSolidSphere(moons[count].radius, 50, 50);
+	char image[] = "..\\..\\textures\\2k_saturn.bmp";
+	cgvTexture texture(image);
+	texture.apply();
+
+	gluQuadricTexture(ring, TRUE);
+	gluQuadricNormals(ring, GLU_SMOOTH);
+	gluDisk(ring, 7, 8, 100, 100);
+
+	light.switchOff();
+	light.apply();
 	glPopMatrix();
 }
 
@@ -106,6 +148,22 @@ void Planet::move()
 	
 	for (int i = 0;i < moon_count;i++)
 		moons[i].current_angle += moons[i].speed * scaleHours;
+}
+
+void Planet::addMoon(double radius, double distance, double speed)
+{
+	if (moon_count > 3) return;
+	moons[moon_count].radius = scaleSize(radius)/scaleRadius;
+	moons[moon_count].distance = scaleSize(distance) / scaleRadius;
+	moons[moon_count].speed = speed;
+	moons[moon_count].current_angle = rand() % 360;
+	moon_count++;
+}
+
+void Planet::addRing(double inner_ring, double outer_ring)
+{
+	this->ring_inner = inner_ring;
+	this->ring_outer = outer_ring;
 }
 
 void Planet::set_color(GLubyte _color[3])

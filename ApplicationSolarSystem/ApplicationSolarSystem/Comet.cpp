@@ -30,6 +30,8 @@ void Comet::draw(float x, float y, float z)
 
 	gluSphere(sphere, this->radius, 10, 10);
 
+	light.switchOff();
+	light.apply();
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);

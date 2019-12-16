@@ -34,6 +34,9 @@ void Sun::draw()
 
 
 	gluSphere(sphere, this->radius, 320, 160);
+
+	light.switchOff();
+	light.apply();
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);
@@ -64,6 +67,9 @@ void Sun::draw_space()
 	gluSphere(sphere, space_radius()-10000, 320, 160);
 
 	glCullFace(GL_BACK);
+	light.switchOff();
+	light.apply();
+
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);

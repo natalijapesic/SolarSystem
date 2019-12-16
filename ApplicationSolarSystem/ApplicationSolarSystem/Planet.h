@@ -14,7 +14,7 @@
 
 #include <GL/glut.h>
 #include <string.h>
-
+#include<stdlib.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -65,9 +65,11 @@ public:
 	Planet(double _radius,const char image[200], double _orbit_radius, double _orbital_speed, double _rotational_speed, GLubyte _select[3]);
 	void draw();
 	void drawMoon(int count);
+	void drawRing();
 
 	void move();
 	void addMoon(double radius, double distance, double speed);
+	void addRing(double inner_ring, double outer_ring);
 	void set_color(GLubyte color[3]);
 
 };

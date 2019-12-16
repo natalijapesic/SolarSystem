@@ -28,10 +28,10 @@ void cgvInterface::create_world(void) {
 	double furthest_point = width_image + shift;
 
 	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
-		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point + sqrt(2) * furthest_point + 3/*to see the whole system*/);
 
 	interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(0, furthest_point, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(-1.0, 0, 0),
-		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point + sqrt(2)*furthest_point+3 /*to see the whole system*/);
 
 	
 	border = scaleSize(2 * earth_radius) / scaleRadius;// 4 neptun radius = 2 neptuns
@@ -42,7 +42,7 @@ void cgvInterface::create_world(void) {
 		+ border/*right border where a part of the sun is visible*/;
 
 	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
-		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
+		-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * (1+sqrt(2)) /*to see the whole system*/);
 
 
 	//border = scaleSize(1 * earth_radius) / scaleRadius;// 4 neptun radius = 2 neptuns
@@ -55,7 +55,7 @@ void cgvInterface::create_world(void) {
 	//interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image / 2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
 	//	-1 * width_image / 2, 1 * width_image / 2, -1 * width_image * 0.7 / 4, 1 * width_image * 0.7 / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
 
-	interface.camera[3].set(CGV_PARALLEL, cgvPoint3D(0, 0, 4), cgvPoint3D(0, 0, 0), cgvPoint3D(0, 1, 0), -2, 2, -1 * 0.7, 1 * 0.7, 1.5, 100);
+	interface.camera[3].set(CGV_PARALLEL, cgvPoint3D(0, 0, 4), cgvPoint3D(0, 0, 0), cgvPoint3D(0, 1, 0), -2, 2, -1 * 0.7, 1 * 0.7, 0, 100);
 
 }
 
@@ -166,8 +166,37 @@ void cgvInterface::set_glutReshapeFunc(int w, int h) {
 void cgvInterface::set_glutDisplayFunc() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the window and the z-buffer
 
+	int unit = interface.get_width_window() / 3;
+
+#pragma region small1
+	glViewport(0, 0, unit * 0.9, unit / 2 * 0.9 * 0.7);
+	interface.camera[0].apply();
+	interface.scene.render(interface.mode);
+#pragma endregion
+
+#pragma region small2
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glViewport(1.05 * unit, 0, unit * 0.9, unit / 2 * 0.9 * 0.7);
+	interface.camera[1].apply();
+	interface.scene.render(interface.mode);
+#pragma endregion
+
+#pragma region small3
+	glViewport(2.1 * unit, 0, unit * 0.9, unit / 2 * 0.9 * 0.7);
+	interface.camera[2].apply();
+	interface.scene.render(interface.mode);
+#pragma endregion
+
+
+	unit = interface.get_width_window();
+
+#pragma region large
+	glViewport(0, 0.3 * unit / 2, unit, unit * 0.7 / 2);
+	//interface.camera[3].apply();//interface.current_cam
+	//interface.scene.render();
+
 	// set up the viewport
-	glViewport(0, 0, interface.get_width_window(), interface.get_height_window());
+	//glViewport(0, 0, interface.get_width_window(), interface.get_height_window());
 	// Apply the camera and projection parameters
 
 	if (interface.mode == CGV_SELECT) {
@@ -189,6 +218,8 @@ void cgvInterface::set_glutDisplayFunc() {
 		// refresh the window
 		glutSwapBuffers(); // it is used instead of glFlush(), to avoid flickering
 	}
+
+#pragma endregion
 }
 
 void cgvInterface::menuHandle(int value)
