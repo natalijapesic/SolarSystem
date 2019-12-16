@@ -22,7 +22,8 @@ Planet::Planet(double _radius, const char image[200], double _orbit_radius, doub
 	ring_inner = -1;
 	ring_outer = -1;
 
-	//texture = new cgvTexture(this->image_path);
+	this->array_image = loadBMPRaw(this->image_path, this->weight, this->height, true);
+
 }
 
 void Planet::draw()
@@ -46,7 +47,7 @@ void Planet::draw()
 	//static cgvTexture texture(this->image_path);
 	////cgvTexture texture(this->image_path);
 	//texture.apply();
-	cgvTexture texture(this->image_path);
+	cgvTexture texture(this->array_image, this->weight, this->height);
 	texture.apply();
 
 	sphere = gluNewQuadric();
@@ -129,8 +130,8 @@ void Planet::drawRing()
 	material->apply();
 
 	char image[] = "..\\..\\textures\\saturnmap.bmp";
-	static cgvTexture texture(image);
-	texture.apply();
+	//cgvTexture texture(image);
+	//texture.apply();
 
 	gluQuadricTexture(ring, TRUE);
 	gluQuadricNormals(ring, GLU_SMOOTH);

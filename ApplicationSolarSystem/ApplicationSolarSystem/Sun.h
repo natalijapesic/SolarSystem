@@ -29,9 +29,11 @@ private:
 	char image_path[200];
 	char image_space[200];
 
+	unsigned char* array_image;
+	unsigned char* array_space;
+	unsigned int height, weight, s_height, s_weight;;
+public:
 
-public:		
-	
 	Sun(cgvColor color);
 
 	void draw();
@@ -40,5 +42,9 @@ public:
 
 	float get_angle() { return angle; }
 	void inc_angle() { angle += (360 / (30 * 24)) * scaleHours; }
+
+	unsigned char* get_space() { return array_space; }
+	unsigned int get_h() { return this->s_height; }
+	unsigned int get_w() { return this->s_weight; }
 
 };

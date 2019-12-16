@@ -2,15 +2,15 @@
 
 // Constructor and destructor methods
 
-cgvTexture::cgvTexture(char *file) {
-	unsigned char* image;
-	unsigned int width, height;
+cgvTexture::cgvTexture(unsigned char *file, unsigned int w, unsigned int h) {
+	//unsigned char* image;
+	//unsigned int width, height;
 	// load the BMP image in memory
-	image = loadBMPRaw(file, width, height, true);
-
+	//image = loadBMPRaw(file, width, height, true);
+	
 	glGenTextures(1, &idTexture);
 	glBindTexture(GL_TEXTURE_2D, idTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, file);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE/*GL_REPLACE*/);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -29,7 +29,7 @@ cgvTexture::cgvTexture(char *file) {
 
 
 
-	delete[] image;
+	//delete[] image;
 	
 }
 

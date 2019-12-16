@@ -120,10 +120,6 @@ void cgvInterface::set_glutKeyboardFunc(unsigned char key, int x, int y) {
 	 case 'X': // Section G: decrease by 0.2 the spotlight in the X axis
 		 break;
 	 case 'y': // Section G: increase by 0.2 the spotlight in the Y axis
-		 if(rotate_comet)
-		 for (int i = 0; i < 500; i++)
-			interface.scene.comets_rain[i]->move_comet();
-		 interface.scene.instance_sun->inc_angle();
 		 break;
 	 case 'Y': // Section G: decrease by 0.2 the spotlight in the Y axis
 		 break;

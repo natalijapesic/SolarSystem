@@ -29,7 +29,7 @@ class cgvTexture {
 		
 	public:
 		// Default Constructors and destructor
-		cgvTexture(char *file); // Texture from a BMP file
+		cgvTexture(unsigned char *file, unsigned int w, unsigned int h); // Texture from a BMP file
 		~cgvTexture();
 
 		// Methods

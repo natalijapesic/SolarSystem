@@ -61,6 +61,9 @@ protected:
 	Moon moons[4];
 	double ring_inner, ring_outer;
 
+	unsigned char* array_image;
+	unsigned int height, weight;
+
 public:
 	Planet(double _radius,const char image[200], double _orbit_radius, double _orbital_speed, double _rotational_speed, GLubyte _select[3]);
 	void draw();

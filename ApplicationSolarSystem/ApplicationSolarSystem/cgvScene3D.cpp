@@ -33,8 +33,6 @@ cgvScene3D::cgvScene3D () {
 	Neptun = new Planet(scaleSize(neptun_radius), "..\\..\\textures\\2k_neptune.bmp", scaleSize(neptun_orbit_radius), neptun_orbit_rotation, neptun_self_rotatin, val_color);
 	
 	instance_sun = new Sun(cgvColor(255.0, 128.0, 0.0));
-	for (int i = 0; i < 1000; i++)
-		comets_rain[i] = new Comet();
 }
 
 cgvScene3D::~cgvScene3D() {
@@ -113,9 +111,6 @@ void cgvScene3D::marija()
 
 		instance_sun->draw_space();
 		instance_sun->draw();
-		comet_angle *= -1;
-		for (int i = 0; i < 500; i++)
-			comets_rain[i]->draw(comet_angle * rand() % 700, rand() % 700, comet_angle * rand() % 1500);
 
 
 
@@ -141,7 +136,7 @@ void cgvScene3D::marija()
 		material->apply();
 
 		char image[] = "..\\..\\textures\\2k_stars.bmp";
-		cgvTexture texture(image);
+		cgvTexture texture(instance_sun->get_space(), instance_sun->get_w(), instance_sun->get_h());
 		texture.apply();
 
 		gluQuadricTexture(sphere, TRUE);
