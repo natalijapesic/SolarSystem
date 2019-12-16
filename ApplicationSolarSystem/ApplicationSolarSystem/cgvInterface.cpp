@@ -15,60 +15,7 @@ static int x = 0;
 
 // Public methods ----------------------------------------
 void cgvInterface::create_world(void) {
-	// create the camera
 
-	mode = CGV_VISUALIZE;
-	pressed_button = false;
-
-	interface.current_cam = 2;
-
-	// create the camera
-	double size_of_the_visible_part;// from camera:
-	size_of_the_visible_part = scaleSize(sun_radius) / 2 / scaleRadius;//distance from the coordinate beggining to the furthest planet - center to center
-	double znear = scaleSize(neptun_orbit_radius + sun_radius + neptun_radius) * 1.01 / 2 / scaleRadius;
-	double shift = scaleSize(sun_radius) * 0.8 / scaleRadius;//
-	//double parameter = size_of_the_visible_part / 2/* + shift*/;
-
-	interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(znear, 0, size_of_the_visible_part + shift), cgvPoint3D(0, 0, size_of_the_visible_part + shift), cgvPoint3D(0, 1.0, 0),
-		-1 * size_of_the_visible_part, 1 * size_of_the_visible_part, -1 * size_of_the_visible_part / 2, 1 * size_of_the_visible_part / 2, -1 * 0, znear * 2);
-
-	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(30,0,-50),cgvPoint3D(0,0,0),cgvPoint3D(0,1, 0),
-		                                -1*100, 1*100, -1*50, 1*50, -1*0, 600);
-	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 0), cgvPoint3D(0, 0, 250), cgvPoint3D(0, 1.0, 0),
-		-1 * 2500, 1 * 2500, -1 * 1250, 1 * 1250, -1 * 0, 5000000 * 2);
-
-
-	// create the camera
-	double size_of_the_visible_part;// from camera:
-	size_of_the_visible_part = scaleSize(sun_radius) / 2 / scaleRadius;//distance from the coordinate beggining to the furthest planet - center to center
-	double znear = scaleSize(neptun_orbit_radius + sun_radius + neptun_radius) *1.01 / 2 / scaleRadius;
-	double shift = scaleSize(sun_radius)*0.8 / scaleRadius;//
-	//double parameter = size_of_the_visible_part / 2/* + shift*/;
-
-	interface.camera[2].set(CGV_PARALLEL, cgvPoint3D(znear, 0, size_of_the_visible_part + shift), cgvPoint3D(0, 0, size_of_the_visible_part + shift), cgvPoint3D(0, 1.0, 0),
-		-1 * size_of_the_visible_part, 1 * size_of_the_visible_part, -1 * size_of_the_visible_part / 2, 1 * size_of_the_visible_part / 2, -1 * 0, znear * 2);
-
-	double border = scaleSize(4 * neptun_radius)/scaleRadius;// 4 neptun radius = 2 neptuns
-	shift = scaleSize(sun_radius)/scaleRadius - border;
-
-	double width_image = border/*add to the left of the image*/
-		+ 2 * scaleSize(neptun_radius)/scaleRadius/*do fit the last planet*/
-		+ scaleSize(neptun_orbit_radius) / scaleRadius/*distance between npt and sun*/
-		+ border/*right border where a part of the sun is visible*/;
-
-	double furthest_point = width_image + shift;
-	printf("%f\n", width_image);
-	
-	interface.camera[1].set(CGV_PARALLEL, cgvPoint3D(furthest_point, 0, width_image/2 + shift), cgvPoint3D(0, 0, width_image / 2 + shift), cgvPoint3D(0, 1.0, 0),
-		-1 * width_image/2, 1 * width_image / 2, -1 * width_image / 4, 1 * width_image / 4, -1 * 0, furthest_point * 2 /*to see the whole system*/);
-
-
-	interface.camera[0].set(CGV_PARALLEL, cgvPoint3D(300,0,50),cgvPoint3D(0,0,50),cgvPoint3D(0,1.0,0),
-		                                -1*70, 1*70, -1*35, 1*35, -1*0, 600);
-	
-	
-	interface.camera[3].set(CGV_PARALLEL, cgvPoint3D(50000, 0, 225), cgvPoint3D(0, 0, 225), cgvPoint3D(0, 1.0, 0),
-		-1 * 225, 1 * 225, -1 * 112.5, 1 * 112.5, -1 * 0, 50000 * 2);
 }
 
 void cgvInterface::configure_environment(int argc, char** argv, 
