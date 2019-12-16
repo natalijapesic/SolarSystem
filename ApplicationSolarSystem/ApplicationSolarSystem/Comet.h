@@ -17,24 +17,23 @@
 #include "Constants.h"
 #include "cgvLight.h"
 #include "cgvMaterial.h"
+
+#define _USE_MATH_DEFINES
+#include <math.h>
 class Comet
 {
 private:
 	double radius;
-	double tail;
-	double tail_angle;
-	double sun_distance;
-	double sun_rotation;
+	double orbit_radius;
+	double orbital_speed;
+	double rotation_speed;
+	double rotate_angle;
+	double orbit_angle;
 
 public:
-	Comet();
+	Comet(double _radius, double _orbit_radius, double _speed, double _orbital_speed, double _rotational_speed);
 
-	void draw(float x, float y, float z);
-	void move_comet();
-	void print(){
-		printf("sun d %f", sun_distance);
-		printf("angle %d", comet_angle);
-		printf(" speed %f", comet_speed);
-	}
+	void draw();
+
 };
 

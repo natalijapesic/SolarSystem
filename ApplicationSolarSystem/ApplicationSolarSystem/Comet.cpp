@@ -1,53 +1,38 @@
 #include "Comet.h"
 
-Comet::Comet()
+Comet::Comet(double _radius, double _orbit_radius, double _speed, double _orbital_speed, double _rotational_speed)
 {
-	this->radius = comet_radius*100/ scaleRadius;
+	this->radius = _radius;
+	this->orbit_radius = _orbit_radius + scaleSize(sun_radius); //distance from the sun + sun radius = distance from the center of the sun
+	this->orbital_speed = _speed;
+	this->rotation_speed = _rotational_speed;
 
-	comet_angle *= -1;
-	this->tail_angle = comet_angle*45.0f;
-
-	this->sun_distance = (middle_distance+ rand()%1000)/scaleRadius;
-
-	this->sun_rotation = (360 / (30 * 24))*scaleHours;
+	rotate_angle = 0;
+	orbit_angle = 0;
 }
 
-void Comet::draw(float x, float y, float z)
+void Comet::draw()
 {
-	glPushMatrix();
+	GLUquadric* sphere;
+	double xx = orbit_radius * sin(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
+	double yy = orbit_radius * cos(M_PI * 2 * this->orbit_angle / 360) / scaleRadius;
+	glTranslatef(xx, 0, yy);
 
-	cgvLight light(GL_LIGHT1, cgvPoint3D(0, 0, 0), cgvColor(100, 100, 0), cgvColor(0, 0, 0), cgvColor(0, 0, 0), 1, 0, 0);
-	light.switchOn();
-	light.apply();
+	glRotatef(this->rotate_angle, 0, 0, 1);
 
-	cgvMaterial material(cgvColor(0, 0, 0), cgvColor(0, 0, 0), cgvColor(0, 0, 0), 1);
-	material.apply();
+	glTranslatef(xx, 0, yy);
+	sphere = gluNewQuadric();
 
-	glRotated(sun_rotation, 0, 1, 0);
-	glTranslatef(this->sun_distance + x, y, z);
+	glColor3f(0.0, 1.0, 0.0);
+	gluQuadricDrawStyle(sphere, GLU_FILL);
 
-	GLUquadric* sphere = gluNewQuadric();
+	cgvMaterial* material = new cgvMaterial(cgvColor(1, 1, 1), cgvColor(1, 1, 1), cgvColor(1, 1, 1), 50);
+	material->apply();
 
-	gluSphere(sphere, this->radius, 10, 10);
+	gluSphere(sphere, radius / scaleRadius, 32, 16);
 
-	light.switchOff();
-	light.apply();
 	glPopMatrix();
 
 	gluDeleteQuadric(sphere);
-}
-
-void Comet::move_comet()
-{
-	if ((sun_distance > scaleSize(sun_radius+4000) / scaleRadius) && rotate_comet)
-	{
-		sun_distance -= comet_speed;
-		sun_rotation += (360 / (30 * 24)) * scaleHours;
-	}
-	else {
-		rotate_comet = false;
-		sun_distance += comet_speed;
-	}
-	
 }
 
